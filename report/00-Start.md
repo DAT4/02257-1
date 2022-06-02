@@ -1,6 +1,9 @@
 ---
 title: Report
 author: Group 01
+date: \today
+geometry: margin=2cm
+output: pdf_document
 ---
 
 # Section 1
