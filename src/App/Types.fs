@@ -55,3 +55,7 @@ let design tree =
         (resulttree, resultextend)
     fst (design' tree)
 
+let simpleTestTree = Node("A",[]);;
+let _ = design simpleTestTree;;
+let slightlyMoreComplexTree = Node("B", [simpleTestTree])
+let _ = design (Node("B", [simpleTestTree]));;
