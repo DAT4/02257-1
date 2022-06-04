@@ -43,7 +43,6 @@ let mean (x, y) = (x+y)/2.0
 let fitlist es = List.map mean (List.zip (fitlistl es) (fitlistr es))
 
 
-
 let design tree =
     let rec design' (Node(label, subtrees)) =
         let (trees, extends)    = List.unzip (List.map design' subtrees)
@@ -55,7 +54,7 @@ let design tree =
         (resulttree, resultextend)
     fst (design' tree)
 
-let simpleTestTree = Node("A",[]);;
-let _ = design simpleTestTree;;
-let slightlyMoreComplexTree = Node("B", [simpleTestTree])
-let _ = design (Node("B", [simpleTestTree]));;
+//let simpleTestTree = Node("A",[]);;
+//let _ = design simpleTestTree;;
+//let slightlyMoreComplexTree = Node("B", [simpleTestTree])
+//let _ = design (Node("B", [simpleTestTree]));;
