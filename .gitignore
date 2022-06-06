@@ -30,3 +30,7 @@ src/App/obj/Debug/net6.0/App.fsproj.FileListAbsolute.txt
 src/App/obj/Debug/net6.0/App.genruntimeconfig.cache
 src/App/obj/Debug/net6.0/App.pdb
 src/App/obj/Debug/net6.0/apphost.exe
+
+src/main
+src/main.o
+src/main.hi
