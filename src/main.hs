@@ -36,17 +36,16 @@ fitlist es = map mean $ zip ( h es mergeExtends ) ( h es $ flip mergeExtends )
                     g acc ( e:es ) = v : ( g $ f acc $ moveExtend v e ) es 
                       where v = fit acc e
 
-design' :: Tree a -> ( PosTree a, Extend )
-design' ( Node x cs ) = ( resultTree, resultExtent )
-    where 
-      ( trees, extents ) = unzip $ map design' cs
-      positions          = fitlist extents
-      ptrees             = map ( \( t,v ) -> moveTree v t ) $ zip trees positions
-      pextents           = map ( \( t,v ) -> moveExtend v t ) $ zip extents positions
-      resultExtent       = ( 0, 0 ) : mergeExtendLists pextents
-      resultTree         = PosNode x 0 ptrees
-
 design :: Tree a -> PosTree a
-design t = fst $ design' t
+design t = fst $ f t
+    where f :: Tree a -> ( PosTree a, Extend )
+          f ( Node x cs ) = ( resultTree, resultExtent )
+              where 
+                ( trees, extents ) = unzip $ map f cs
+                positions          = fitlist extents
+                ptrees             = map ( \( t,v ) -> moveTree v t ) $ zip trees positions
+                pextents           = map ( \( t,v ) -> moveExtend v t ) $ zip extents positions
+                resultExtent       = ( 0, 0 ) : mergeExtendLists pextents
+                resultTree         = PosNode x 0 ptrees
 
 main = putStrLn $ show $ design ( Node "A" [Node "B" [Node "C" [], Node "D" [Node "E" [], Node "F" [], Node "G" [Node "H" [], Node "I" []]]]] )
