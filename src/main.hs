@@ -3,14 +3,11 @@ data PosTree a = PosNode a Float [PosTree a] deriving Show
 type Span = (Float, Float)
 type Extend = [Span]
 
-moveTree :: (PosTree a, Float) -> PosTree a
-moveTree ((PosNode x pos cs), v) = PosNode x (pos+v) cs
+moveTree :: Float -> PosTree a -> PosTree a
+moveTree v (PosNode x pos cs) = PosNode x (pos+v) cs
 
-moveSpan :: Span -> Float -> Span
-moveSpan (x1, x2) v = (x1+v, x2+v)
-
-moveExtend :: (Extend, Float) -> Extend
-moveExtend (es, v) = map (\x -> moveSpan x v) es
+moveExtend :: Float -> Extend -> Extend
+moveExtend v es = map (\(a,b) -> (a+v, b+v)) es
 
 mergeExtends :: Extend -> Extend -> Extend
 mergeExtends ps []                 = ps
@@ -21,44 +18,33 @@ mergeExtendLists :: [Extend] -> Extend
 mergeExtendLists = foldr mergeExtends [] 
 
 rmax :: Span -> Float
-rmax (p,q) | p > q     = p 
-           | otherwise = q
+rmax (p,q) | p > q = p | otherwise = q
 
 fit :: Extend -> Extend -> Float
-fit ((_,p):ps) ((q,_):qs) = rmax(fit ps qs, p-q + 1.0)
-fit _ _                   = 0.0
-
-fitlistl' :: Extend -> [Extend] -> [Float]
-fitlistl' acc [] = []
-fitlistl' acc (e:es) = x : (fitlistl' $ mergeExtends acc $ moveExtend (e,x)) es
-    where x = fit acc e
-
-fitlistl :: [Extend] -> [Float]
-fitlistl es = fitlistl' [] es
-
-fitlistr' :: Extend -> [Extend] -> [Float]
-fitlistr' acc [] = []
-fitlistr' acc (e:es) = x : (fitlistl' $ mergeExtends (moveExtend (e,x)) acc) es
-    where x = fit acc e
-
-fitlistr :: [Extend] -> [Float]
-fitlistr es = reverse $ fitlistr' [] es
+fit ((_,p):ps) ((q,_):qs) = rmax(fit ps qs, p-q + 1)
+fit _ _                   = 0
 
 mean :: Span -> Float
 mean (x,y) = (x+y) / 2
 
 fitlist :: [Extend] -> [Float]
-fitlist es = map mean $ zip (fitlistl es) (fitlistr es)
+fitlist es = map mean $ zip (h mergeExtends es) (h (flip mergeExtends) es)
+    where h :: (Extend -> Extend -> Extend) -> [Extend] -> [Float]
+          h f es = g [] es
+              where g :: Extend -> [Extend] -> [Float]
+                    g acc [] = []
+                    g acc (e:es) = v : (g $ f acc $ moveExtend v e) es 
+                      where v = fit acc e
 
 design' :: Tree a -> (PosTree a, Extend)
 design' (Node x cs) = (resultTree, resultExtent)
     where 
       (trees, extents) = unzip $ map design' cs
       positions        = fitlist extents
-      ptrees           = map moveTree $ zip trees positions
-      pextents         = map moveExtend $ zip extents positions
-      resultExtent     = (0.0, 0.0) : mergeExtendLists pextents
-      resultTree       = PosNode x 0.0 ptrees
+      ptrees           = map (\(t,v) -> moveTree v t) $ zip trees positions
+      pextents         = map (\(t,v) -> moveExtend v t) $ zip extents positions
+      resultExtent     = (0, 0) : mergeExtendLists pextents
+      resultTree       = PosNode x 0 ptrees
 
 design :: Tree a -> PosTree a
 design t = fst $ design' t
