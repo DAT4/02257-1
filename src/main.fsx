@@ -37,8 +37,8 @@ let fitlistr (es: Extend list): float list =
     let rec f acc es' =
         match es' with
         | [] -> []
-        | (e::es'') -> fit acc e |> fun x -> x::f (mergeExtend (moveExtend x e) acc ) es''
-    f [] es
+        | (e::es'') -> -(fit e acc) |> fun x -> x::f (mergeExtend (moveExtend x e) acc ) es''
+    (List.rev (f [] (List.rev es)))
 
 let mean (x: float, y: float) : float = 
     (x+y)/2.0
@@ -57,7 +57,8 @@ let design (t: Tree<'a>) : PosTree<'a> =
         (resulttree, resultextend)
     fst (f t)
 
-let x = Node("A", [Node("B", []) ; Node("B", []) ; Node("C", []) ; Node("D", [])])
+//let x = Node("A", [Node("B", []) ; Node("B", []) ; Node("C", []) ; Node("D", [])])
+let x = Node("A", [Node("B", []) ; Node("C", []) ; Node("D", []) ])
 let z = design x
 printfn "%A" z
 
