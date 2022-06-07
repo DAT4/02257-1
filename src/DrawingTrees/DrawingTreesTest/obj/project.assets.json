@@ -8,6 +8,31 @@
           "build/netstandard1.0/coverlet.collector.targets": {}
         }
       },
+      "FsCheck/2.16.5": {
+        "type": "package",
+        "dependencies": {
+          "FSharp.Core": "4.2.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/FsCheck.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FsCheck.dll": {}
+        }
+      },
+      "FsCheck.NUnit/2.16.5": {
+        "type": "package",
+        "dependencies": {
+          "FsCheck": "[2.16.5]",
+          "NUnit": "[3.13.1, 4.0.0)"
+        },
+        "compile": {
+          "lib/netstandard2.0/FsCheck.NUnit.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FsCheck.NUnit.dll": {}
+        }
+      },
       "FSharp.Core/6.0.4": {
         "type": "package",
         "compile": {
@@ -942,6 +967,19 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "DrawingTrees/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "FSharp.Core": "6.0.4"
+        },
+        "compile": {
+          "bin/placeholder/DrawingTrees.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DrawingTrees.dll": {}
+        }
       }
     }
   },
@@ -995,6 +1033,40 @@
         "coverlet-icon.png",
         "coverlet.collector.3.1.2.nupkg.sha512",
         "coverlet.collector.nuspec"
+      ]
+    },
+    "FsCheck/2.16.5": {
+      "sha512": "Tw6Lb/UBqtmUj5porM1rRcAU5xT9NttSlFTaIQ8gn4Fsw2LiZavN/eMAZqSA63laV51t4HRJJAAGeYSWFFxRfA==",
+      "type": "package",
+      "path": "fscheck/2.16.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fscheck.2.16.5.nupkg.sha512",
+        "fscheck.nuspec",
+        "lib/net452/FsCheck.dll",
+        "lib/net452/FsCheck.xml",
+        "lib/netstandard1.0/FsCheck.dll",
+        "lib/netstandard1.0/FsCheck.xml",
+        "lib/netstandard1.6/FsCheck.dll",
+        "lib/netstandard1.6/FsCheck.xml",
+        "lib/netstandard2.0/FsCheck.dll",
+        "lib/netstandard2.0/FsCheck.xml"
+      ]
+    },
+    "FsCheck.NUnit/2.16.5": {
+      "sha512": "79RD/11WNESNxR8GOk1G9zNYMwqMB77A1c7VlNdVt4q8eh52BTTKCuKlTBnUpHRfDCsjvJUrtYFqqFXFRzg/pw==",
+      "type": "package",
+      "path": "fscheck.nunit/2.16.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fscheck.nunit.2.16.5.nupkg.sha512",
+        "fscheck.nunit.nuspec",
+        "lib/net452/FsCheck.NUnit.dll",
+        "lib/net452/FsCheck.NUnit.xml",
+        "lib/netstandard2.0/FsCheck.NUnit.dll",
+        "lib/netstandard2.0/FsCheck.NUnit.xml"
       ]
     },
     "FSharp.Core/6.0.4": {
@@ -3969,11 +4041,19 @@
         "system.xml.xdocument.4.0.11.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "DrawingTrees/1.0.0": {
+      "type": "project",
+      "path": "../DrawingTrees.fsproj",
+      "msbuildProject": "../DrawingTrees.fsproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "DrawingTrees >= 1.0.0",
       "FSharp.Core >= 6.0.4",
+      "FsCheck >= 2.16.5",
+      "FsCheck.NUnit >= 2.16.5",
       "Microsoft.NET.Test.Sdk >= 17.1.0",
       "NUnit >= 3.13.3",
       "NUnit.Analyzers >= 3.3.0",
@@ -3987,11 +4067,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\johan\\OneDrive\\Desktop\\Johan\\Kursus02257\\project 1\\02257-1\\src\\DrawingTrees\\DrawingTreesTest\\DrawingTreesTest.fsproj",
+      "projectUniqueName": "C:\\Users\\johan\\OneDrive\\Desktop\\Johan\\Kursus02257\\project 1\\02257-1\\src\\DrawingTrees\\DrawingTreesTest\\DrawingTreesTest.fsproj",
       "projectName": "DrawingTreesTest",
-      "projectPath": "c:\\Users\\johan\\OneDrive\\Desktop\\Johan\\Kursus02257\\project 1\\02257-1\\src\\DrawingTrees\\DrawingTreesTest\\DrawingTreesTest.fsproj",
+      "projectPath": "C:\\Users\\johan\\OneDrive\\Desktop\\Johan\\Kursus02257\\project 1\\02257-1\\src\\DrawingTrees\\DrawingTreesTest\\DrawingTreesTest.fsproj",
       "packagesPath": "C:\\Users\\johan\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\johan\\OneDrive\\Desktop\\Johan\\Kursus02257\\project 1\\02257-1\\src\\DrawingTrees\\DrawingTreesTest\\obj\\",
+      "outputPath": "C:\\Users\\johan\\OneDrive\\Desktop\\Johan\\Kursus02257\\project 1\\02257-1\\src\\DrawingTrees\\DrawingTreesTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\johan\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4006,7 +4086,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\johan\\OneDrive\\Desktop\\Johan\\Kursus02257\\project 1\\02257-1\\src\\DrawingTrees\\DrawingTrees.fsproj": {
+              "projectPath": "C:\\Users\\johan\\OneDrive\\Desktop\\Johan\\Kursus02257\\project 1\\02257-1\\src\\DrawingTrees\\DrawingTrees.fsproj"
+            }
+          }
         }
       }
     },
@@ -4019,6 +4103,15 @@
             "target": "Package",
             "version": "[6.0.4, )",
             "generatePathProperty": true
+          },
+          "FsCheck": {
+            "target": "Package",
+            "version": "[2.16.5, )",
+            "generatePathProperty": true
+          },
+          "FsCheck.NUnit": {
+            "target": "Package",
+            "version": "[2.16.5, )"
           },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",

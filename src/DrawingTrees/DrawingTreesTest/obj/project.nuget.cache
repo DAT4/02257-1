@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "QF6BBqXkEs0xWp/gGxF8KJt7ON4LxhLUyFuqHeLP2JE18kKL51Tx8osu8Xk0wkShno5uEGPfoN3Lhy44fcLbjQ==",
+  "dgSpecHash": "+i8bO0OVQxHnFPRBEYCE5g04lzZtUg2khKwe5S2tQw6wVdwdBS3w+PujgtDkzOeUZ9zN41aYLQ/LVtudub/8AA==",
   "success": true,
-  "projectFilePath": "c:\\Users\\johan\\OneDrive\\Desktop\\Johan\\Kursus02257\\project 1\\02257-1\\src\\DrawingTrees\\DrawingTreesTest\\DrawingTreesTest.fsproj",
+  "projectFilePath": "C:\\Users\\johan\\OneDrive\\Desktop\\Johan\\Kursus02257\\project 1\\02257-1\\src\\DrawingTrees\\DrawingTreesTest\\DrawingTreesTest.fsproj",
   "expectedPackageFiles": [
     "C:\\Users\\johan\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
+    "C:\\Users\\johan\\.nuget\\packages\\fscheck\\2.16.5\\fscheck.2.16.5.nupkg.sha512",
+    "C:\\Users\\johan\\.nuget\\packages\\fscheck.nunit\\2.16.5\\fscheck.nunit.2.16.5.nupkg.sha512",
     "C:\\Users\\johan\\.nuget\\packages\\fsharp.core\\6.0.4\\fsharp.core.6.0.4.nupkg.sha512",
     "C:\\Users\\johan\\.nuget\\packages\\microsoft.codecoverage\\17.1.0\\microsoft.codecoverage.17.1.0.nupkg.sha512",
     "C:\\Users\\johan\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
