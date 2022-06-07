@@ -75,10 +75,8 @@ let firstPos (rightExtreme: float) (t : PosTree<'a>) : float =
 //let x = Node("A", [Node("B", []) ; Node("B", []) ; Node("C", []) ; Node("D", [])])
 
 let flatten(t: PosTree<'a>) =
-    let rec inner (depth: int) (PosNode(x, pos, cs)) =
-        (x,pos, depth) :: List.collect (inner (depth+1)) cs 
-    List.groupBy (fun (_,_,d) -> d) (inner 0 t ) 
-        |> List.map (fun (_,c) -> List.map (fun (a,b,_) -> (a,b))c)
+    let rec inner (depth: int) (PosNode(x, pos, cs)) = (x,pos, depth) :: List.collect (inner (depth+1)) cs 
+    List.groupBy (fun (_,_,d) -> d) (inner 0 t ) |> List.map (fun (_,c) -> List.map (fun (a,b,_) -> (a,b))c)
 
 let makeASCII(t: Tree<string>) : string =
     let (tree, extends) = blueprint t
