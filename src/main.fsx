@@ -72,19 +72,26 @@ let firstPos (rightExtreme: float) (t : PosTree<'a>) : float =
         | _ -> pos
     rightExtreme - f t
 
+//let x = Node("A", [Node("B", []) ; Node("B", []) ; Node("C", []) ; Node("D", [])])
+
+let flatten(t: PosTree<'a>) =
+    let rec inner (depth: int) (PosNode(x, pos, cs)) =
+        (x,pos, depth) :: List.collect (inner (depth+1)) cs 
+    List.groupBy (fun (_,_,d) -> d) (inner 0 t ) 
+        |> List.map (fun (_,c) -> List.map (fun (a,b,_) -> (a,b))c)
+
 let makeASCII(t: Tree<string>) : string =
     let (tree, extends) = blueprint t
     let (l, r) = extremes extends 
+    let width = -int(l) + int(r)
     let start = int(firstPos r tree) - int(l) 
+    let lines = flatten tree
 
-    let rec f ( PosNode(x: string, pos, cs) ) ( parentPos: int) : string =
-        let p = parentPos+int(pos)
-        (String.replicate p " ") + x + (List.map (fun x -> f x p) cs |> String.concat " ")
+    "hello world"
 
-    f tree start
 
-//let x = Node("A", [Node("B", []) ; Node("B", []) ; Node("C", []) ; Node("D", [])])
-let x = Node("A", [Node("B", []) ; Node("C", []) ; Node("D", []) ])
+
+let x = Node("A", [Node("B", []) ; Node("C", []) ; Node("D", [])])
 let z = makeASCII(x)
 printfn "%A" z
 
