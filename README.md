@@ -17,7 +17,7 @@
   - [x] Make Haskell version
   - [x] Make F# version
   - [x] Make sure that it works
-  - [ ] Make sure output is correct
+  - [x] Make sure output is correct
 - [ ] Visualization
   - [ ] Make text representation
   - [ ] Pick plotly or SVG
