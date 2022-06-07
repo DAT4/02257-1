@@ -13,7 +13,7 @@ let rec mergeExtend (ps : Extend) (qs: Extend) =
     | (ps, []) -> ps
     | ((p,_)::ps', (_,q)::qs') -> (p,q)::(mergeExtend ps' qs')
 
-let megergeExtendList (es: Extend list) = 
+let mergeExtendList (es: Extend list) = 
     List.fold mergeExtend [] es
 
 let rmax (p: float) (q: float) = 
@@ -47,11 +47,18 @@ let fitlist (es: Extend list) : float list =
 let design (t: Tree<'a>) : PosTree<'a> =
     let rec f (Node(x, xs)) =
         List.unzip (List.map f xs) |> fun (ts, es) -> 
-        let positions           = fitlist es 
-        let ptrees              = List.map (fun (v,t) -> moveTree v t) (List.zip positions ts )
-        let ptextends           = List.map (fun (v,e) -> moveExtend v e) (List.zip positions es )
-        let resultextend        = (0.0, 0.0) :: megergeExtendList ptextends
-        let resulttree          = PosNode(x, 0.0, ptrees)
+        let positions =
+            fitlist es 
+        let ptrees =
+            List.map (fun (v,t) -> moveTree v t)
+                     (List.zip positions ts )
+        let ptextends =
+            List.map (fun (v,e) -> moveExtend v e)
+                     (List.zip positions es )
+        let resultextend =
+            (0.0, 0.0) :: mergeExtendList ptextends
+        let resulttree =
+            PosNode(x, 0.0, ptrees)
         (resulttree, resultextend)
     fst (f t)
 
