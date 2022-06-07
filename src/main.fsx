@@ -46,19 +46,27 @@ let mean (x: float, y: float) : float =
 let fitlist (es: Extend list) : float list = 
     List.map mean (List.zip (fitlistl es) (fitlistr es))
 
-let design (t: Tree<'a>) : PosTree<'a> =
-    let rec f (Node(x, xs)) =
-        List.unzip (List.map f xs) |> fun (ts, es) -> 
-        let positions           = fitlist es 
-        let ptrees              = List.map (fun (v,t) -> moveTree v t) (List.zip positions ts )
-        let ptextends           = List.map (fun (v,e) -> moveExtend v e) (List.zip positions es )
-        let resultextend        = (0.0, 0.0) :: megergeExtendList ptextends
-        let resulttree          = PosNode(x, 0.0, ptrees)
-        (resulttree, resultextend)
-    fst (f t)
+let rec blueprint (Node(x, xs)) =
+    List.unzip (List.map blueprint xs) |> fun (ts, es) -> 
+    let positions           = fitlist es 
+    let ptrees              = List.map (fun (v,t) -> moveTree v t) (List.zip positions ts )
+    let ptextends           = List.map (fun (v,e) -> moveExtend v e) (List.zip positions es )
+    let resultextend        = (0.0, 0.0) :: megergeExtendList ptextends
+    let resulttree          = PosNode(x, 0.0, ptrees)
+    (resulttree, resultextend)
+
+let designTree (t: Tree<'a>) : PosTree<'a> =
+    fst (blueprint t)
+
+let designExtends (t: Tree<'a>) : Extend = 
+    snd (blueprint t)
+
+let extremes (t : Tree<'a>): float*float = 
+    let (lefts, rights) = List.unzip ( designExtends t )
+    List.min(lefts), List.max(rights)
 
 //let x = Node("A", [Node("B", []) ; Node("B", []) ; Node("C", []) ; Node("D", [])])
 let x = Node("A", [Node("B", []) ; Node("C", []) ; Node("D", []) ])
-let z = design x
+let z = extremes x
 printfn "%A" z
 
