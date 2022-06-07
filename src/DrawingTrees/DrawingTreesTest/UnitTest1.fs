@@ -31,3 +31,12 @@ let testMeanDifferentInput2 () =
     let expected = 1.5
     let actual = mean (0.0, 3.0)
     Assert.AreEqual (expected, actual)
+
+open FsCheck
+let nf = NormalFloat.op_Explicit
+open FsCheck.NUnit
+[<Property>]
+let fsCheckTest () =
+    let meanSymmetryProp (a,b) =
+        mean (nf a,nf b) = mean (nf b, nf a)
+    meanSymmetryProp
