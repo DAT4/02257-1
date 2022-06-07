@@ -3,13 +3,19 @@
 ## Tasks
 
 ### Report
-- [ ] Outlining 
-- [ ] Analysis
-- [ ] Design
-- [ ] Implementation
-  - [ ] Visualization
-- [ ] Tests
-- [ ] Conclusion
+
+#### Main Sections
+
+- [ ] Design of aesthetic pleasant renderings
+- [ ] Visualization of trees
+- [ ] Property based testing
+- [ ] Evaluation
+
+#### Other possible Sections
+- [ ] Systematic testing
+- [ ] Correctness
+- [ ] Algorithmic analysis
+- [ ] Application
 
 ### Implementation
 
