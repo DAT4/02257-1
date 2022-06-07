@@ -25,6 +25,7 @@
   - [x] Make sure that it works
   - [x] Make sure output is correct
 - [ ] Visualization
+  - [ ] Make a list of list of labels and global positions for printing
   - [ ] Make text representation
   - [ ] Pick plotly or SVG
 

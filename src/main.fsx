@@ -61,12 +61,30 @@ let designTree (t: Tree<'a>) : PosTree<'a> =
 let designExtends (t: Tree<'a>) : Extend = 
     snd (blueprint t)
 
-let extremes (t : Tree<'a>): float*float = 
-    let (lefts, rights) = List.unzip ( designExtends t )
+let extremes (e: Extend): float*float = 
+    let (lefts, rights) = List.unzip ( e )
     List.min(lefts), List.max(rights)
+
+let firstPos (rightExtreme: float) (t : PosTree<'a>) : float = 
+    let rec f (PosNode(_, pos, cs)) =  
+        match pos with 
+        | pos when pos < rightExtreme -> pos + (f (List.last cs))
+        | _ -> pos
+    rightExtreme - f t
+
+let makeASCII(t: Tree<string>) : string =
+    let (tree, extends) = blueprint t
+    let (l, r) = extremes extends 
+    let start = int(firstPos r tree) - int(l) 
+
+    let rec f ( PosNode(x: string, pos, cs) ) ( parentPos: int) : string =
+        let p = parentPos+int(pos)
+        (String.replicate p " ") + x + (List.map (fun x -> f x p) cs |> String.concat " ")
+
+    f tree start
 
 //let x = Node("A", [Node("B", []) ; Node("B", []) ; Node("C", []) ; Node("D", [])])
 let x = Node("A", [Node("B", []) ; Node("C", []) ; Node("D", []) ])
-let z = extremes x
+let z = makeASCII(x)
 printfn "%A" z
 
