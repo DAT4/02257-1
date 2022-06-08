@@ -74,22 +74,28 @@ let firstPos (rightExtreme: float) (t : PosTree<'a>) : float =
 
 //let x = Node("A", [Node("B", []) ; Node("B", []) ; Node("C", []) ; Node("D", [])])
 
-let flatten(t: PosTree<'a>) =
-    let rec inner (depth: int) (PosNode(x, pos, cs)) = (x,pos, depth) :: List.collect (inner (depth+1)) cs 
-    List.groupBy (fun (_,_,d) -> d) (inner 0 t ) |> List.map (fun (_,c) -> List.map (fun (a,b,_) -> (a,b))c)
+let flatten(start: float) (t: PosTree<'a>) =
+    let rec inner (depth: int) (parentPos: float)  (PosNode(x, pos, cs)) = 
+        (x,( pos+parentPos, depth)) :: List.collect (inner (depth+1) (parentPos + pos)) cs 
+    inner 0 start t
 
-let makeASCII(t: Tree<string>) : string =
+let makeGlobalPositionedLayerCake(t: Tree<'a>) =
     let (tree, extends) = blueprint t
     let (l, r) = extremes extends 
-    let width = -int(l) + int(r)
-    let start = int(firstPos r tree) - int(l) 
-    let lines = flatten tree
+    let width = -int(l*2.0) + int(r*2.0)
+    printfn "left: %A right: %A" l r
+    let start = int(firstPos r tree) 
+    let lines = flatten start tree
+    let height = List.max (List.map (fun (_,(_,x)) -> x) lines) * 2
+    List.map (fun (a, (h,v)) -> (a, (int((h-l)*2.0), v*2))) lines, width*5, height*5
 
-    "hello world"
+let draw(t: Tree<'a>) =
+    let (layerCake, width, height) = makeGlobalPositionedLayerCake t
+    let scaledLayerCake = List.map (fun (a,(v,h)) -> (a,(v*5, h*5))) layerCake
+    let svg (content) = sprintf "<svg height=\"%i\" width=\"%i\">\n%A\n</svg>" (height) (width) content
+    svg scaledLayerCake
 
-
-
-let x = Node("A", [Node("B", []) ; Node("C", []) ; Node("D", [])])
-let z = makeASCII(x)
+let x = Node("A", [Node("B", []) ; Node("C", []) ; Node("D", []); Node("E", [])])
+let z = draw(x)
 printfn "%A" z
 
