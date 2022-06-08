@@ -6,10 +6,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="UnitTests.fs" />
-    <Compile Include="aestethicRule1.fs" />
-    <Compile Include="aestethicRule2.fs" />
-    <Compile Include="aestethicRule3.fs" />
-    <Compile Include="aestethicRule4.fs" />
+    <Compile Include="aestheticRule1.fs" />
+    <Compile Include="aestheticRule2.fs" />
+    <Compile Include="aestheticRule3.fs" />
+    <Compile Include="aestheticRule4.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
