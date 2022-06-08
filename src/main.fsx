@@ -67,16 +67,15 @@ let extremes (e: Extend): float*float =
 
 let firstPos (rightExtreme: float) (t : PosTree<'a>) : float = 
     let rec f (PosNode(_, pos, cs)) =  
-        match pos with 
-        | pos when pos < rightExtreme -> pos + (f (List.last cs))
-        | _ -> pos
+        match (pos, cs) with 
+        | _, [] -> pos
+        | pos, _ when pos < rightExtreme -> pos + (f (List.last cs))
+        | _, _ -> pos
     rightExtreme - f t
-
-//let x = Node("A", [Node("B", []) ; Node("B", []) ; Node("C", []) ; Node("D", [])])
 
 let flatten(start: float) (t: PosTree<'a>) =
     let rec inner (depth: int) (parentPos: float)  (PosNode(x, pos, cs)) = 
-        (x, (parentPos, depth), ( pos+parentPos, depth)) :: List.collect (inner (depth+1) (parentPos + pos)) cs 
+        (x, (parentPos, depth-1), ( pos+parentPos, depth)) :: List.collect (inner (depth+1) (parentPos + pos)) cs 
     inner 0 start t
 
 let makeGlobalPositionedLayerCake(t: Tree<'a>) =
@@ -88,16 +87,47 @@ let makeGlobalPositionedLayerCake(t: Tree<'a>) =
     let height = List.max (List.map (fun (_,_,(_,x)) -> x) lines) * 2
     List.map (fun (a, (ph, pv), (h,v)) -> (a, (int((ph-l)*2.0), pv*2), (int((h-l)*2.0), v*2))) lines, width, height
 
-let draw(t: Tree<'a>) =
+let draw (scale: int) (t: Tree<string>) =
     let (layerCake, width, height) = makeGlobalPositionedLayerCake t
-    let scale = 50
-    let scaledLayerCake = List.map (fun (a,(ph, pv),(v,h)) -> (a, (ph*scale, pv*scale), (v*scale, h*scale))) layerCake
-    let svg (content) = sprintf "<svg height=\"%i\" width=\"%i\">\n%s\n</svg>" (height*scale) (width*scale) content
-    let content = List.map (fun (x, _, (h, v)) -> sprintf "<text x=\"%i\" y=\"%i\" fill=\"black\">%A</text>" h v x) scaledLayerCake |> String.concat "\n"
-    let content2 = List.map (fun (_, (ph, pv), (h, v)) -> sprintf "<line x1=\"%i\" y1=\"%i\" x2=\"%i\" y2=\"%i\" style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" h v ph pv ) scaledLayerCake |> String.concat "\n"
-    svg (content + content2)
 
-let x = Node("A", [Node("B", []) ; Node("C", []) ; Node("D", []); Node("E", [Node("F", [])])])
-let z = draw(x)
+    let drawLetter h v x = sprintf "<text x=\"%i\" y=\"%i\" fill=\"black\">%A</text>" h v x
+    let drawLine ph pv h v = sprintf "<line x1=\"%i\" y1=\"%i\" x2=\"%i\" y2=\"%i\" style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" ph pv h v
+    let svg (content) = sprintf "<svg height=\"%i\" width=\"%i\">\n%s\n</svg>" (height*scale) (width*scale) content
+
+    let scaledLayerCake = List.map (fun (a,(ph, pv),(v,h)) -> (a, (ph*scale, pv*scale), (v*scale, h*scale))) layerCake
+
+    let content = List.map (fun (x, _, (h, v)) -> drawLetter h v x) scaledLayerCake |> String.concat "\n"
+    let content2 = List.map (fun (_, (ph, pv), (h, v)) -> drawLine ph pv h v ) scaledLayerCake |> List.tail |> String.concat "\n" 
+
+    svg (content + "\n" + content2)
+
+let x = Node("A", 
+            [
+                Node("B", []) ; 
+                Node("C", []) ;
+                Node("D", [
+                    Node("G", [
+                        Node("H", []);
+                        Node("I", [])
+                        ])
+                    ]);
+                    Node("E", [
+                        Node("F", []) ;
+                        Node("J", []) ;
+                        Node("K", [
+                        Node("J", []) ;
+                        Node("J", []) ;
+                        Node("J", []) ;
+                        Node("J", [
+                        Node("J", []) ;
+                        Node("J", [
+                        Node("J", []) ;
+                        Node("J", []) ;
+                        ]) ;
+                        ]) ;
+                        ]) ;
+                        ])
+                    ])
+let z = draw 100 x
 printfn "%s" z
 
