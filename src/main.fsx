@@ -101,33 +101,38 @@ let draw (scale: int) (t: Tree<string>) =
 
     svg (content + "\n" + content2)
 
-let x = Node("A", 
-            [
-                Node("B", []) ; 
-                Node("C", []) ;
+let x = Node("A", [
+            Node("B", []) ; 
+            Node("C", []) ;
+            Node("D", [
                 Node("D", [
-                    Node("G", [
-                        Node("H", []);
-                        Node("I", [])
-                        ])
-                    ]);
-                    Node("E", [
-                        Node("F", []) ;
-                        Node("J", []) ;
-                        Node("K", [
-                        Node("J", []) ;
-                        Node("J", []) ;
-                        Node("J", []) ;
-                        Node("J", [
-                        Node("J", []) ;
-                        Node("J", [
-                        Node("J", []) ;
-                        Node("J", []) ;
-                        ]) ;
-                        ]) ;
-                        ]) ;
-                        ])
+                    Node("E", []);
+                    Node("F", [])
                     ])
-let z = draw 100 x
+                ]);
+                Node("G", [
+                    Node("H", []) ;
+                    Node("I", []) ;
+                    Node("J", [
+                        Node("K", []) ;
+                        Node("L", [
+                            Node("M", []) ;
+                            Node("N", [
+                                Node("O", []) ;
+                                Node("P", []) ;
+                            ]) ;
+                        ]) ;
+                        Node("Q", []) ;
+                        Node("R", [
+                            Node("S", []) ;
+                            Node("T", [
+                                Node("U", []) ;
+                                Node("V", []) ;
+                            ]) ;
+                        ]) ;
+                    ]) ;
+                ])
+            ])
+let z = draw 75 x
 printfn "%s" z
 
