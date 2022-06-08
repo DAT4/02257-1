@@ -36,7 +36,7 @@ open FsCheck
 let nf = NormalFloat.op_Explicit
 open FsCheck.NUnit
 [<Property>]
-let fsCheckTest () =
+let symmetryOfMeanTest () =
     let meanSymmetryProp (a,b) =
         mean (nf a,nf b) = mean (nf b, nf a)
     meanSymmetryProp
