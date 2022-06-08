@@ -76,26 +76,28 @@ let firstPos (rightExtreme: float) (t : PosTree<'a>) : float =
 
 let flatten(start: float) (t: PosTree<'a>) =
     let rec inner (depth: int) (parentPos: float)  (PosNode(x, pos, cs)) = 
-        (x,( pos+parentPos, depth)) :: List.collect (inner (depth+1) (parentPos + pos)) cs 
+        (x, (parentPos, depth-1), ( pos+parentPos, depth)) :: List.collect (inner (depth+1) (parentPos + pos)) cs 
     inner 0 start t
 
 let makeGlobalPositionedLayerCake(t: Tree<'a>) =
     let (tree, extends) = blueprint t
     let (l, r) = extremes extends 
     let width = -int(l*2.0) + int(r*2.0)
-    printfn "left: %A right: %A" l r
     let start = int(firstPos r tree) 
     let lines = flatten start tree
-    let height = List.max (List.map (fun (_,(_,x)) -> x) lines) * 2
-    List.map (fun (a, (h,v)) -> (a, (int((h-l)*2.0), v*2))) lines, width*5, height*5
+    let height = List.max (List.map (fun (_,_,(_,x)) -> x) lines) * 2
+    List.map (fun (a, (ph, pv), (h,v)) -> (a, (int((ph-l)*2.0), pv*2), (int((h-l)*2.0), v*2))) lines, width, height
 
 let draw(t: Tree<'a>) =
     let (layerCake, width, height) = makeGlobalPositionedLayerCake t
-    let scaledLayerCake = List.map (fun (a,(v,h)) -> (a,(v*5, h*5))) layerCake
-    let svg (content) = sprintf "<svg height=\"%i\" width=\"%i\">\n%A\n</svg>" (height) (width) content
-    svg scaledLayerCake
+    let scale = 50
+    let scaledLayerCake = List.map (fun (a,(ph, pv),(v,h)) -> (a, (ph*scale, ph*scale), (v*scale, h*scale))) layerCake
+    let svg (content) = sprintf "<svg height=\"%i\" width=\"%i\">\n%s\n</svg>" (height*scale) (width*scale) content
+    let content = List.map (fun (x, _, (h, v)) -> sprintf "<text x=\"%i\" y=\"%i\" fill=\"black\">%A</text>" h v x) scaledLayerCake |> String.concat "\n"
+    let content2 = List.map (fun (_, (ph, pv), (h, v)) -> sprintf "<line x1=\"%i\" y1=\"%i\" x2=\"%i\" y2=\"%i\" style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" ph -pv h v) scaledLayerCake |> String.concat "\n"
+    svg (content + content2)
 
-let x = Node("A", [Node("B", []) ; Node("C", []) ; Node("D", []); Node("E", [])])
+let x = Node("A", [Node("B", []) ; Node("C", []) ; Node("D", []); Node("E", [Node("F", [])])])
 let z = draw(x)
-printfn "%A" z
+printfn "%s" z
 
