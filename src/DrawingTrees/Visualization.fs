@@ -35,9 +35,12 @@ let absolutify (scale: int) (t: Tree<'a>) =
 let draw (scale: int) (t: Tree<'a>) =
     let tree, (width, height) = absolutify scale t
     let svg (content) = sprintf "<svg height=\"%i\" width=\"%i\">\n%s\n</svg>" height width content
-    let text px py x y v = sprintf "<text x=\"%i\" y=\"%i\" fill=\"black\">%A</text>\n\
-                                    <line x1=\"%i\" y1=\"%i\" x2=\"%i\" y2=\"%i\" \
-				    style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" x y v px py x y
+
+    let text px py x y v = 
+        let text = sprintf "<text x=\"%i\" y=\"%i\" fill=\"black\">%A</text>\n" x y v
+        let line = sprintf "<line x1=\"%i\" y1=\"%i\" x2=\"%i\" y2=\"%i\" style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" px py x y
+        if (px+py) = 0 then text else text+line
+
     let rec content (px: int, py: int) (AbsPosNode(v, (x, y), cs)) =
         let out = text px py x y v
         match cs with

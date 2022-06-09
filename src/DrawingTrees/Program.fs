@@ -3,7 +3,6 @@
 // | JRA             | June 2  |
 // | AA, JL, JRA, MM | June 3  |
 // | MM              | June 8  |
-open System
 open TreeTypes
 open PositionedTree
 open Visualization
@@ -57,8 +56,3 @@ let main(args) =
             | _ -> sprintf "pick one of -> visual | relative | abs"
     printfn "%s" z
     0
-    
-    
-
-
-
