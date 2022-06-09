@@ -58,7 +58,11 @@ let firstPos (rightExtreme: float) (t : PosTree<'a>) : float =
 
 The x coordinate is still not fully absolute in relation to the canvas, because every coordinate on the left of the root node has a negative value. To get the absolute value we just need to shift the element to the right by adding it with the inverted value of the left extreme.
 
-The implementation resulted in a function which takes a simple tree, and a scale which is used to modify the distance between the coordinates of the nodes. The function sets the 
+The implementation resulted in a function which takes a simple tree, and a scale which is used to modify the distance between the coordinates of the nodes.
+
+All number values used in the trees and extends are floats but in SVG we will need integers for the coordinates. The float values always follow the interval of 0.5 so we can get the same precision using integers by multiplying the values by 2 before we cast them to integers.
+
+The inner function will recursively traverse through the tree and apply the absolute positions for the x and y coordinates to each node. At last the absolute positioned tree will be returned in a tuple together with the width and the height of the whole frame.
 
 ```fs
 let absolutify (scale: int) (t: Tree<'a>) =
@@ -78,3 +82,22 @@ let absolutify (scale: int) (t: Tree<'a>) =
 
 ## Mapping absolute coordinate tree to SVG image
 
+When the absolute positions of each node is already given the mapping to SVG is simple. We define the SVG frame using the width and the height and the content of the SVG file is given by mapping the coordinates and the value of the nodes to the text and the line SVG objects.
+
+```fs
+let draw (scale: int) (t: Tree<'a>) =
+    let tree, (width, height) = absolutify scale t
+    let svg (content) = sprintf "<svg height=\"%i\" width=\"%i\">\n%s\n</svg>" height width content
+
+    let text px py x y v = 
+        let text = sprintf "<text x=\"%i\" y=\"%i\" fill=\"black\">%A</text>\n" x y v
+        let line = sprintf "<line x1=\"%i\" y1=\"%i\" x2=\"%i\" y2=\"%i\" style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" px py x y
+        if (px+py) = 0 then text else text+line
+
+    let rec content (px: int, py: int) (AbsPosNode(v, (x, y), cs)) =
+        let out = text px py x y v
+        match cs with
+        | [] -> out
+        | _ -> out + "\n" + (List.map (content (x,y)) cs |> (String.concat "\n"))
+    svg (content (0,0) tree)
+```
