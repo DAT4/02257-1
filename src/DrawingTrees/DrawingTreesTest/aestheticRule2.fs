@@ -4,16 +4,21 @@ open FsCheck
 open FsCheck.NUnit
 open TreeTypes
 
+let centeringProperty (PosNode (_, pos, subtrees) as tree ) =
+    match subtrees with
+    | [] -> true
+    | PosNode(_, posSubtree, subsubtrees)::[] ->
+        if posSubtree = pos then
+            true
+        else
+            false
+    | stl::middleSubtrees::str -> 
+        if pos = mean (snd stl, snd str) then
+            
+        else 
+            false
 [<Property>]
 let positioningOffsprings () =
-    let centeringProperty (PosNode (_, pos, subtrees) as tree ) =
-        match subtrees with
-        | [] -> true
-        | PosNode(_, posSubtree, subsubtrees)::[] ->
-            if posSubtree = pos then
-                true
-            else
-                false
-        | stl::middleSubtrees::str -> true
+
     centeringProperty
 
