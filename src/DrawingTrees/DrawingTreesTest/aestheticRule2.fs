@@ -2,6 +2,7 @@
 //------------------------------
 // | JRA             | June 8  |
 // | JRA             | June 9  |
+
 // Aesthethic 2: A parent should be centred over its offspring.
 module AestheticRule2
 open FsCheck
