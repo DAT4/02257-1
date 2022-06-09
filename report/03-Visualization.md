@@ -56,5 +56,20 @@ let firstPos (rightExtreme: float) (t : PosTree<'a>) : float =
     rightExtreme - f t
 ```
 
-The position is still not fully absolute in relation to the canvas, because the extend value is given 
+The x coordinate is still not fully absolute in relation to the canvas, because every coordinate on the left of the root node has a negative value. To get the absolute value we just need to shift the element to the right by adding it with the inverted value of the left extreme.
 
+```fs
+let absolutify (scale: int) (t: Tree<'a>) =
+    let (tree, extends) = blueprint t
+    let (left, right)   = extremes extends 
+    let width           = int((left + right) * 2.0)
+    let start           = int(firstPos right tree) 
+    let rec f (depth: int) (px: float) (PosNode(x, pos, cs)) =
+        let (t, d) = 
+            match cs with 
+            | []  -> [], depth
+            | _  -> List.map (f (depth+1) (pos+px)) cs |> List.unzip |> fun (t, d) -> t, List.max d
+        AbsPosNode( x, (int((pos+px+left)*2.0)*scale, depth*2*scale),  t ), d 
+    let (out, depth) = f 0 start tree 
+    out, (width * scale, depth * 2 * scale )
+```
