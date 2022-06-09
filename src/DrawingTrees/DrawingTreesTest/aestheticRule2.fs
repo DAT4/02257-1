@@ -7,20 +7,30 @@ module AestheticRule2
 open FsCheck
 open FsCheck.NUnit
 open TreeTypes
+open PositionedTree
 
-let centeringProperty (PosNode (_, pos, subtrees) as tree ) =
-    match subtrees with
+let rec checkSubtreePositions (parentPosition:float) (subtreePositions :float list) =
+    match subtreePositions with
     | [] -> true
-    | PosNode(_, posSubtree, subsubtrees)::[] ->
-        if posSubtree = pos then
-            true
-        else
-            false
-    | stl::middleSubtrees::str -> 
-        if pos = mean (snd stl, snd str) then
-            
-        else 
-            false
+    | headPosition::tailList -> 
+        match tailList |> List.rev with
+        | [] -> parentPosition = headPosition
+        | tailPosition::middlePositions ->
+            if parentPosition = mean(headPosition, tailPosition) then
+                checkSubtreePositions parentPosition middlePositions
+            else
+                false
+
+let rec centeringProperty (PosNode (_, pos, subtrees) as tree ) =
+    let getSubtreePosition (PosNode (_, pos, _)) = pos
+    let subtreePositions = subtrees |> List.map getSubtreePosition
+    if checkSubtreePositions pos subtreePositions then
+        subtrees |> List.map centeringProperty
+                 |> List.tryFind (fun propertyObeyed -> propertyObeyed = false)
+                 |> Option.defaultValue true
+    else
+        false
+
 [<Property>]
 let positioningOffsprings () =
 
