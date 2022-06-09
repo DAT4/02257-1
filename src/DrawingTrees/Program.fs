@@ -1,4 +1,9 @@
-﻿open System
+﻿// | Author(s)       | date    |
+//------------------------------
+// | JRA             | June 2  |
+// | AA, JL, JRA, MM | June 3  |
+// | MM              | June 8  |
+open System
 open TreeTypes
 open PositionedTree
 open Visualization

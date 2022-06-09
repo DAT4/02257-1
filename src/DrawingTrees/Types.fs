@@ -1,4 +1,9 @@
-﻿module TreeTypes
+﻿// | Author(s)       | date    |
+//------------------------------
+// | JRA             | June 2  |
+// | AA, JL, JRA, MM | June 3  |
+// | MM              | June 8  |
+module TreeTypes
 
 type Span = (float * float)
 type Extend = Span list

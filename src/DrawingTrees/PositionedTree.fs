@@ -1,4 +1,8 @@
-﻿module PositionedTree
+﻿// | Author(s)       | date    |
+//------------------------------
+// | JRA             | June 2  |
+// | AA, JL, JRA, MM | June 3  |
+module PositionedTree
 open TreeTypes
 
 let moveTree (v: float) (PosNode(x, pos, cs)): PosTree<'a> = 

@@ -1,3 +1,6 @@
+// | Author(s)       | date    |
+//------------------------------
+// | JRA             | June 8  |
 module DrawingTreesTest
 
 open NUnit.Framework
@@ -34,9 +37,10 @@ let testMeanDifferentInput2 () =
 
 open FsCheck
 let nf = NormalFloat.op_Explicit
+let meanSymmetryProp (a,b) =
+    mean (nf a, nf b) = mean (nf b, nf a)
+
 open FsCheck.NUnit
 [<Property>]
 let symmetryOfMeanTest () =
-    let meanSymmetryProp (a,b) =
-        mean (nf a,nf b) = mean (nf b, nf a)
     meanSymmetryProp

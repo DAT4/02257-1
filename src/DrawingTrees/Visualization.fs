@@ -1,3 +1,7 @@
+// | Author(s)       | date    |
+//------------------------------
+// | MM              | June 8  |
+// Note: JL worked on a parallel implementation with a python interface, but it was collectively decided to use this.
 module Visualization
 open PositionedTree
 open TreeTypes
