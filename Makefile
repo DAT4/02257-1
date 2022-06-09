@@ -4,5 +4,4 @@ report:
 	pandoc -o report.pdf report/*.md
 
 visual:
-	dotnet fsi src/main.fsx > visual.svg && inkscape visual.svg
-
+	dotnet run --project src/DrawingTrees/ > visual.svg && inkscape visual.svg
