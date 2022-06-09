@@ -27,6 +27,7 @@
   - [x] Make absolute positioned trees 
   - [x] Scale positions for SVG
   - [x] Map absolute positioned trees to SVG
+- [ ] Find and fix the error about horizontal distance between nodes
 
 ### Tests
 
