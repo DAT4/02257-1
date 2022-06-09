@@ -1,5 +1,7 @@
 type Tree<'a> = Node of 'a * Tree<'a> list
 type PosTree<'a> = PosNode of 'a * float * PosTree<'a> list
+type Coordinates = int * int
+type AbsPosTree<'a> = AbsPosNode of 'a * Coordinates * AbsPosTree<'a> list
 type Span = (float * float)
 type Extend = Span list
 
@@ -63,7 +65,7 @@ let designExtends (t: Tree<'a>) : Extend =
 
 let extremes (e: Extend): float*float = 
     let (lefts, rights) = List.unzip ( e )
-    List.min(lefts), List.max(rights)
+    -List.min(lefts), List.max(rights)
 
 let firstPos (rightExtreme: float) (t : PosTree<'a>) : float = 
     let rec f (PosNode(_, pos, cs)) =  
@@ -73,33 +75,33 @@ let firstPos (rightExtreme: float) (t : PosTree<'a>) : float =
         | _, _ -> pos
     rightExtreme - f t
 
-let flatten(start: float) (t: PosTree<'a>) =
-    let rec inner (depth: int) (parentPos: float)  (PosNode(x, pos, cs)) = 
-        (x, (parentPos, depth-1), ( pos+parentPos, depth)) :: List.collect (inner (depth+1) (parentPos + pos)) cs 
-    inner 0 start t
-
-let makeGlobalPositionedLayerCake(t: Tree<'a>) =
+let absolutify (scale: int) (t: Tree<'a>) =
     let (tree, extends) = blueprint t
-    let (l, r) = extremes extends 
-    let width = -int(l*2.0) + int(r*2.0)
-    let start = int(firstPos r tree) 
-    let lines = flatten start tree
-    let height = List.max (List.map (fun (_,_,(_,x)) -> x) lines) * 2
-    List.map (fun (a, (ph, pv), (h,v)) -> (a, (int((ph-l)*2.0), pv*2), (int((h-l)*2.0), v*2))) lines, width, height
+    let (left, right)   = extremes extends 
+    let width           = int((left + right) * 2.0)
+    let start           = int(firstPos right tree) 
+    let rec f (depth: int) (px: float) (PosNode(x, pos, cs)) =
+        let (t, d) = 
+            match cs with 
+            | []  -> [], depth
+            | _  -> List.map (f (depth+1) (pos+px)) cs |> List.unzip |> fun (t, d) -> t, List.max d
+        AbsPosNode( x, (int((pos+px+left)*2.0)*scale, depth*2*scale),  t ), d 
+    let (out, depth) = f 0 start tree 
+    out, (width * scale, depth * 2 * scale )
 
-let draw (scale: int) (t: Tree<string>) =
-    let (layerCake, width, height) = makeGlobalPositionedLayerCake t
+let draw (scale: int) (t: Tree<'a>) =
+    let tree, (width, height) = absolutify scale t
+    let svg (content) = sprintf "<svg height=\"%i\" width=\"%i\">\n%s\n</svg>" height width content
+    let text px py x y v = sprintf "<text x=\"%i\" y=\"%i\" fill=\"black\">%A</text>\n\
+                                    <line x1=\"%i\" y1=\"%i\" x2=\"%i\" y2=\"%i\" \
+				    style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" x y v px py x y
+    let rec content (px: int, py: int) (AbsPosNode(v, (x, y), cs)) =
+        let out = text px py x y v
+        match cs with
+        | [] -> out
+        | _ -> out + "\n" + (List.map (content (x,y)) cs |> (String.concat "\n"))
+    svg (content (0,0) tree)
 
-    let drawLetter h v x = sprintf "<text x=\"%i\" y=\"%i\" fill=\"black\">%A</text>" h v x
-    let drawLine ph pv h v = sprintf "<line x1=\"%i\" y1=\"%i\" x2=\"%i\" y2=\"%i\" style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" ph pv h v
-    let svg (content) = sprintf "<svg height=\"%i\" width=\"%i\">\n%s\n</svg>" (height*scale) (width*scale) content
-
-    let scaledLayerCake = List.map (fun (a,(ph, pv),(v,h)) -> (a, (ph*scale, pv*scale), (v*scale, h*scale))) layerCake
-
-    let content = List.map (fun (x, _, (h, v)) -> drawLetter h v x) scaledLayerCake |> String.concat "\n"
-    let content2 = List.map (fun (_, (ph, pv), (h, v)) -> drawLine ph pv h v ) scaledLayerCake |> List.tail |> String.concat "\n" 
-
-    svg (content + "\n" + content2)
 
 let x = Node("A", [
             Node("B", []) ; 
@@ -133,6 +135,10 @@ let x = Node("A", [
                     ]) ;
                 ])
             ])
+
 let z = draw 75 x
 printfn "%s" z
+
+//let z = absolutify 75 x
+//printfn "%A" z
 
