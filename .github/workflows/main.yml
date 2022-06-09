@@ -16,5 +16,4 @@ jobs:
           args: -c "mkdir output;pandoc --template report/template/latex.template -V breakurl -V hyphens=URL --pdf-engine=xelatex -o report.pdf report/*.md"
       - uses: actions/upload-artifact@master
         with:
-          name: report
           path: report.pdf
