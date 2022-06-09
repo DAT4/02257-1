@@ -19,15 +19,14 @@
 
 ### Implementation
 
-- [ ] Translate code
-  - [x] Make Haskell version
+- [x] Translate code from article
   - [x] Make F# version
   - [x] Make sure that it works
   - [x] Make sure output is correct
-- [ ] Visualization
-  - [ ] Make a list of list of labels and global positions for printing
-  - [ ] Make text representation
-  - [ ] Pick plotly or SVG
+- [x] Visualization
+  - [x] Make absolute positioned trees 
+  - [x] Scale positions for SVG
+  - [x] Map absolute positioned trees to SVG
 
 ### Tests
 
