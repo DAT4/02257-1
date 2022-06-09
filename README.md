@@ -6,6 +6,7 @@
 
 #### Main Sections
 
+- [ ] Project Declaration
 - [ ] Design of aesthetic pleasant renderings
   - [ ] what if content size varies 
 - [ ] Visualization of trees
@@ -13,6 +14,7 @@
 - [ ] Evaluation
 
 #### Other possible Sections
+
 - [ ] Systematic testing
 - [ ] Correctness
 - [ ] Algorithmic analysis
@@ -20,6 +22,9 @@
 
 ### Implementation
 
+- [ ] Add header comment to each file
+  - date
+  - author
 - [x] Translate code from article
   - [x] Make F# version
   - [x] Make sure that it works
@@ -37,7 +42,7 @@
   - [ ] Simple tree
   - [ ] Complex tree
   - [ ] Trees from paper
-
+  
 ### Tests
 
 - [ ] Property based 
