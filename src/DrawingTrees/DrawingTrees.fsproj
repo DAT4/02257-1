@@ -6,6 +6,7 @@
   <ItemGroup>
     <Compile Include="Types.fs" />
     <Compile Include="PositionedTree.fs" />
+    <Compile Include="Visualization.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 </Project>
