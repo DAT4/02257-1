@@ -1,3 +1,4 @@
+\pagebreak
 # Visualization of trees
 
 To visualize the tree we will need to map the tree structure into an image. 
@@ -91,7 +92,8 @@ let draw (scale: int) (t: Tree<'a>) =
 
     let text px py x y v = 
         let text = sprintf "<text x=\"%i\" y=\"%i\" fill=\"black\">%A</text>\n" x y v
-        let line = sprintf "<line x1=\"%i\" y1=\"%i\" x2=\"%i\" y2=\"%i\" style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" px py x y
+        let line = sprintf "<line x1=\"%i\" y1=\"%i\" x2=\"%i\" y2=\"%i\" \
+	                    style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" px py x y
         if (px+py) = 0 then text else text+line
 
     let rec content (px: int, py: int) (AbsPosNode(v, (x, y), cs)) =
