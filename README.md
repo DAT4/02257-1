@@ -28,8 +28,19 @@
   - [x] Scale positions for SVG
   - [x] Map absolute positioned trees to SVG
 - [ ] Find and fix the error about horizontal distance between nodes
+- [ ] Make generator for tests
+- [ ] Make a set of trees to use when starting the program
+  - [ ] Symmetrical tree
+  - [ ] Identical sub trees
+  - [ ] Simple tree
+  - [ ] Complex tree
+  - [ ] Trees from paper
 
 ### Tests
 
 - [ ] Property based 
-- [ ] Unit 
+  - [ ] Two nodes at the same level should be placed at least a given distance apart.
+  - [ ] A parent should be centred over its offspring.
+  - [ ] Tree drawings should be symmetrical 
+  - [ ] Identical sub trees should be rendered identically—their
+- [ ] Unit tests
