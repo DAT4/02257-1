@@ -1,10 +1,11 @@
-﻿open TreeTypes
+﻿open System
+open TreeTypes
 open PositionedTree
 open Visualization
 
 //let x = Node("A", [Node("B", []) ; Node("B", []) ; Node("C", []) ; Node("D", [])])
 //let x = Node("A", [Node("B", []) ; Node("C", []) ; Node("D", []) ])
-let x = Node("A", [
+let t = Node("A", [
             Node("B", []) ; 
             Node("C", []) ;
             Node("D", [
@@ -36,5 +37,23 @@ let x = Node("A", [
                     ]) ;
                 ])
             ])
-let z = draw 75 x
-printfn "%s" z
+
+[<EntryPoint>]
+let main(args) =
+    let l = List.ofArray args
+    let z = 
+        match (l) with
+        | [] -> sprintf "pick one of -> visual | relative | abs" 
+        | (x::_) -> 
+            match x with 
+            | x when x = "visual" -> sprintf "%s" (draw 75 t)
+            | x when x = "relative" -> sprintf "%A" (designTree t)
+            | x when x = "abs" -> sprintf "%A" (absolutify 1 t)
+            | _ -> sprintf "pick one of -> visual | relative | abs"
+    printfn "%s" z
+    0
+    
+    
+
+
+
