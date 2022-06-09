@@ -31,9 +31,9 @@ And if we add a child to the root node we will also need a line between the node
 </svg>
 ```
 
-## The mapping 
-
 The SVG format depends on absolute coordinates in relation to the canvas of the image output where the x and y axis starts in the top left corner. So assuming we already have a correctly positioned tree using the code from the article, we can convert each node in the tree to a node which has a `x` and a `y` coordinate which will be used when plotting the node on the SVG.
+
+## Getting the absolute coordinates
 
 Each node in the positioned tree has a position relative to its parent. To determine the absolute position of each node we need to first determine the absolute position of the root node. We already know the y coordinate of the root node because it is the one on the top of the canvas, so it is 0. To find the x coordinate of the root node we will need to find the outermost node in one of the sides of the tree and then accumulate the horizontal space all the way back to the root node. We can use the extends given by the `blueprint` function to find the coordinates of the horizontal poles of the Tree
 
@@ -58,6 +58,8 @@ let firstPos (rightExtreme: float) (t : PosTree<'a>) : float =
 
 The x coordinate is still not fully absolute in relation to the canvas, because every coordinate on the left of the root node has a negative value. To get the absolute value we just need to shift the element to the right by adding it with the inverted value of the left extreme.
 
+The implementation resulted in a function which takes a simple tree, and a scale which is used to modify the distance between the coordinates of the nodes. The function sets the 
+
 ```fs
 let absolutify (scale: int) (t: Tree<'a>) =
     let (tree, extends) = blueprint t
@@ -73,3 +75,6 @@ let absolutify (scale: int) (t: Tree<'a>) =
     let (out, depth) = f 0 start tree 
     out, (width * scale, depth * 2 * scale )
 ```
+
+## Mapping absolute coordinate tree to SVG image
+
