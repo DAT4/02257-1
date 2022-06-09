@@ -13,8 +13,8 @@ jobs:
         uses: docker://pandoc/latex:2.9
         with:
           entrypoint: /bin/sh
-          args: -c "mkdir output;pandoc --template report/template/latex.template -V breakurl -V hyphens=URL --pdf-engine=xelatex -o output/report.pdf report/*.md"
+          args: -c "mkdir output;pandoc --template report/template/latex.template -V breakurl -V hyphens=URL --pdf-engine=xelatex -o report.pdf report/*.md"
       - uses: actions/upload-artifact@master
         with:
-          name: output
-          path: output
+          name: report
+          path: report.pdf
