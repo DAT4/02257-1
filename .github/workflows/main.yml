@@ -1,7 +1,8 @@
 name: publish report
 on:
   push:
-    branches: [ "main" ]
+    paths:
+      - 'report/**'
   pull_request:
     branches: [ "main" ]
 jobs:
