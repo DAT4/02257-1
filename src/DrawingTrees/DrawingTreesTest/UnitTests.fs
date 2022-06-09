@@ -4,18 +4,7 @@
 module DrawingTreesTest
 
 open NUnit.Framework
-open TreeTypes
 open PositionedTree
-
-[<SetUp>]
-let Setup () =
-    ()
-
-
-[<Test>]
-let Test1 () =
-    Assert.Pass()
-
 
 [<Test>]
 let testMeanEqualInput () =
@@ -36,11 +25,22 @@ let testMeanDifferentInput2 () =
     Assert.AreEqual (expected, actual)
 
 open FsCheck
-let nf = NormalFloat.op_Explicit
-let meanSymmetryProp (a,b) =
-    mean (nf a, nf b) = mean (nf b, nf a)
+//let nf = NormalFloat.op_Explicit
+let meanSymmetryProp (a,b) = mean (a,b)=mean(b,a)
+//    mean (nf a, nf b) = mean (nf b, nf a)
+
+let normalFloatGenerator =
+    Gen.map NormalFloat.op_Explicit
+            Arb.generate<NormalFloat>
 
 open FsCheck.NUnit
-[<Property>]
+
+type MyGenerators =
+    static member float() =
+        {new Arbitrary<float>() with
+            override this.Generator = normalFloatGenerator
+            override this.Shrinker _ = Seq.empty }
+
+[<Property(Arbitrary=[|typeof<MyGenerators>|])>]
 let symmetryOfMeanTest () =
     meanSymmetryProp
