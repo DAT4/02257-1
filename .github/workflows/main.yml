@@ -1,0 +1,20 @@
+name: publish report
+on:
+  push:
+    paths:
+      - 'report/**'
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: convert md to pdf
+        uses: docker://pandoc/latex:2.9
+        with:
+          entrypoint: /bin/sh
+          args: -c "mkdir output;pandoc --template report/template/latex.template -V breakurl -V hyphens=URL --pdf-engine=xelatex -o report.pdf report/*.md"
+      - uses: actions/upload-artifact@master
+        with:
+          path: report.pdf
