@@ -9,7 +9,7 @@
 - [ ] Project Declaration
 - [ ] Design of aesthetic pleasant renderings
   - [ ] what if content size varies 
-- [ ] Visualization of trees
+- [x] Visualization of trees
 - [ ] Property based testing
 - [ ] Evaluation
 
