@@ -7,6 +7,7 @@
 #### Main Sections
 
 - [ ] Design of aesthetic pleasant renderings
+  - [ ] what if content size varies 
 - [ ] Visualization of trees
 - [ ] Property based testing
 - [ ] Evaluation
@@ -27,6 +28,7 @@
   - [x] Make absolute positioned trees 
   - [x] Scale positions for SVG
   - [x] Map absolute positioned trees to SVG
+  - [ ] No line on root node
 - [ ] Find and fix the error about horizontal distance between nodes
 - [ ] Make generator for tests
 - [ ] Make a set of trees to use when starting the program
