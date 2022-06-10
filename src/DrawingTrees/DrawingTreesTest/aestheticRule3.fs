@@ -11,11 +11,16 @@ open TreeTypes
 open PositionedTree
 
 let rec reflect (PosNode(v, x, subtrees)) =
-    PosNode(v, x, List.map reflect (List.rev subtrees))
+    PosNode(v, -x, List.map reflect (List.rev subtrees))
 
 let rec reflectpos (PosNode(v, x, subtrees)) =
     PosNode(v, -x, List.map reflectpos subtrees)
 
-let symmetryPropery tree =
+let symmetryProperty tree =
     designTree tree = reflect (reflectpos (designTree tree))
 
+//[<Property>]
+open NUnit.Framework
+[<Test>]
+let symmetryOfTrees () =
+    Assert.IsTrue(symmetryProperty Program.t)
