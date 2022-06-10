@@ -1,7 +1,8 @@
 # Project 1 
 
-![report](https://github.com/DAT4/02257-1/actions/workflows/main/badge.svg)
-![tests](https://github.com/DAT4/02257-1/actions/workflows/dotnet/badge.svg)
+![report](https://img.shields.io/github/workflow/status/dat4/02257-1/report?label=Report&style=for-the-badge)
+
+![tests](https://img.shields.io/github/workflow/status/dat4/02257-1/.NET?label=TEST&style=for-the-badge)
 
 ## Tasks
 
