@@ -2,6 +2,7 @@
 //------------------------------
 // | JRA             | June 8  |
 // | JL              | June 9  |
+// | MM              | June 10  |
 // Aesthethic 1: Two nodes at the same level should be placed at least a given distance apart.
 module AestheticRule1
 open FsCheck

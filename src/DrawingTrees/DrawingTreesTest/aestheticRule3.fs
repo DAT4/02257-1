@@ -1,6 +1,7 @@
 // | Author(s)       | date    |
 //------------------------------
 // | JRA             | June 8  |
+// | JRA             | June 10 |
 // Aesthethic 3: Tree drawings should be symmetrical with respect to reflection—a tree and
 // its mirror image should produce drawings that are reflections of each other. In
 // particular, this means that symmetric trees will be rendered symmetrically.
