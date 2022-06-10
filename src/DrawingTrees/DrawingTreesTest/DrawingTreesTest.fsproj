@@ -6,6 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="UnitTests.fs" />
+    <Compile Include="testutils.fs" />
     <Compile Include="aestheticRule1.fs" />
     <Compile Include="aestheticRule2.fs" />
     <Compile Include="aestheticRule3.fs" />
