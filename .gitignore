@@ -21,3 +21,4 @@ src/DrawingTrees/bin/Release/net6.0
 src/DrawingTrees/DrawingTreesTest/.ionide
 src/DrawingTrees/DrawingTreesTest/bin/Debug/net6.0
 src/DrawingTrees/DrawingTreesTest/obj
+local_report.pdf

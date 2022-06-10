@@ -1,4 +1,4 @@
-name: publish report
+name: report
 on:
   push:
     paths:
