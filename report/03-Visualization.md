@@ -1,4 +1,3 @@
-\pagebreak
 # Visualization of trees
 
 To visualize the tree we will need to map the tree structure into an image. 
