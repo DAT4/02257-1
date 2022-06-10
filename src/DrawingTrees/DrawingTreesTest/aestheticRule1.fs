@@ -10,14 +10,10 @@ open TreeTypes
 
 [<Property>]
 let minimum_distance_check (t: PosTree<'a>) = 
-    let inner (nodes) = 
-        match nodes with
-        | [] -> true
-        | [(_, (_, _), (_, _))] -> true
-        | (x1, (_, _), ( pos1, depth1)) :: (x2, (_, _), ( pos2, depth2)) :: xs ->
-            if depth1 = depth2 then 
-                if abs (pos2 - pos1) < 1 then false
-            else inner ((x2, (_, _), ( pos2, depth2)) :: xs)
-
-    inner (flatten 0 t)
-    
+    match t with
+    | [] -> true
+    | [(_, (_, _))] -> true
+    | (x1, ( pos1, depth1)) :: (x2, ( pos2, depth2)) :: xs ->
+        if depth1 = depth2 then 
+            if abs (pos2 - pos1) < 1 then false
+        else minimum_distance_check ((x2, ( pos2, depth2)) :: xs)
