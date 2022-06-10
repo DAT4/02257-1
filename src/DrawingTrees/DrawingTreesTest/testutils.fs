@@ -7,6 +7,3 @@ let flatten (t: Tree<'a>) =
     f 0 0 (designTree t) |> List.groupBy (fun (_,d) -> d)
                          |> List.map ( fun (_, xs) -> xs |> List.map (fun x -> fst x) )
 
-let isOrdered xs = xs
-                  |> Seq.pairwise 
-                  |> Seq.forall (fun (a, b) -> a <= b)
