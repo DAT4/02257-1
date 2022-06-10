@@ -1,5 +1,8 @@
 # Project 1 
 
+![report](https://github.com/DAT4/02257-1/actions/workflows/main/badge.svg)
+![tests](https://github.com/DAT4/02257-1/actions/workflows/dotnet/badge.svg)
+
 ## Tasks
 
 ### Report
