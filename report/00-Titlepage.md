@@ -1,6 +1,7 @@
 ---
 title: Project 1 - Functional Pearls - Drawing Trees
 
+abstract: 'hello this is the abstract'
 author:
   - Abby Audet, s212544
   - Johan Raunkjær Ott, s032060
