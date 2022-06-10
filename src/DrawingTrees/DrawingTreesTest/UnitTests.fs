@@ -26,7 +26,7 @@ let testMeanDifferentInput2 () =
 
 open FsCheck
 open FsCheck.NUnit
-open TestUtilities
+open TestUtils
 let meanSymmetryProp (a,b) = mean (a,b)=mean(b,a)
 
 

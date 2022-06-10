@@ -9,7 +9,7 @@ module AestheticRule2
 open FsCheck
 open FsCheck.NUnit
 open TreeTypes
-open PositionedTree
+open TestUtils
 
 let rec centeringProperty (PosNode (_, _, subtrees) as tree ) =
     match subtrees with
@@ -22,9 +22,6 @@ let rec centeringProperty (PosNode (_, _, subtrees) as tree ) =
         else
             false
 
-let testProperty posTreePropertyFunction tree =
-    designTree tree |> posTreePropertyFunction
-    
 //[<Property>]
 open NUnit.Framework
 [<Test>]
