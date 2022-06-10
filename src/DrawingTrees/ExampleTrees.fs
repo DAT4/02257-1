@@ -1,3 +1,6 @@
+// | Author(s)       | date    |
+//------------------------------
+// | AA              | June 10 |
 open TreeTypes
 
 // Symmetrical Tree
