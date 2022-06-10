@@ -2,7 +2,10 @@ all: run build publish visual
 
 build:
 	dotnet build src/DrawingTrees/ 
-run:
+run: 
+	dotnet run --project src/DrawingTrees/ relative
+
+runAll:
 	dotnet run --project src/DrawingTrees/ relative
 	dotnet run --project src/DrawingTrees/ abs
 	dotnet run --project src/DrawingTrees/ visual
@@ -12,3 +15,6 @@ publish:
 	pandoc --toc --template report/template/latex.template -V breakurl -V hyphens=URL --pdf-engine=xelatex -o local_report.pdf report/*.md 
 visual:
 	dotnet run --project src/DrawingTrees/ visual > visual.svg && inkscape visual.svg
+
+test:
+	dotnet test src/DrawingTrees/DrawingTreesTest 
