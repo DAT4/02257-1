@@ -11,7 +11,7 @@
 
 - [ ] Project Declaration
 - [ ] Design of aesthetic pleasant renderings
-  - [ ] what if content size varies 
+  - [ ] What if content size varies (Nice to have)
 - [x] Visualization of trees
 - [ ] Property based testing
 - [ ] Evaluation
@@ -25,7 +25,7 @@
 
 ### Implementation
 
-- [ ] Add header comment to each file
+- [x] Add header comment to each file
   - date
   - author
 - [x] Translate code from article
@@ -37,19 +37,19 @@
   - [x] Scale positions for SVG
   - [x] Map absolute positioned trees to SVG
   - [x] No line on root node
-- [ ] Find and fix the error about horizontal distance between nodes
 - [ ] Make generator for tests
-- [ ] Make a set of trees to use when starting the program
-  - [ ] Symmetrical tree
-  - [ ] Identical sub trees
-  - [ ] Simple tree
-  - [ ] Complex tree
-  - [ ] Trees from paper
+- [x] Make a set of trees to use when starting the program
+  - [x] Symmetrical tree
+  - [x] Identical sub trees
+  - [x] Simple tree
+  - [x] Complex tree
+  - [x] Trees from paper
+- [ ] Fix spelling mistakes in code
   
 ### Tests
 
 - [ ] Property based 
-  - [ ] Two nodes at the same level should be placed at least a given distance apart.
+  - [x] Two nodes at the same level should be placed at least a given distance apart.
   - [ ] A parent should be centred over its offspring.
   - [ ] Tree drawings should be symmetrical 
   - [ ] Identical sub trees should be rendered identically—their
