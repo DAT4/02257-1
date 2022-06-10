@@ -2,6 +2,7 @@
 //------------------------------
 // | JRA             | June 8  |
 // | JRA             | June 9  |
+// | JRA             | June 10  |
 
 // Aesthethic 2: A parent should be centred over its offspring.
 module AestheticRule2
@@ -10,7 +11,7 @@ open FsCheck.NUnit
 open TreeTypes
 open PositionedTree
 
-let rec centeringProperty (PosNode (_, pos, subtrees) as tree ) =
+let rec centeringProperty (PosNode (_, _, subtrees) as tree ) =
     match subtrees with
     | [] -> true
     | sts ->
