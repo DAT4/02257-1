@@ -10,6 +10,7 @@ let flatten (t: Tree<'a>) =
 let testProperty posTreePropertyFunction tree =
     designTree tree |> posTreePropertyFunction
 
+let getSubtreePositions (PosNode (_, pos, _)) = pos
 
 // --------------- Generators for FsCheck---------------
 open FsCheck

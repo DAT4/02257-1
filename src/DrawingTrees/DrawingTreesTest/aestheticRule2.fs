@@ -15,7 +15,6 @@ let rec centeringProperty (PosNode (_, _, subtrees) as tree ) =
     match subtrees with
     | [] -> true
     | sts ->
-        let getSubtreePositions (PosNode (_, pos, _)) = pos
         let subtreePositions = subtrees |> List.map getSubtreePositions
         if List.min subtreePositions = - List.max subtreePositions then
             sts |> List.forall centeringProperty
