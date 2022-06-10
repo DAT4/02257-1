@@ -5,6 +5,7 @@
     <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="testUtilities.fs" />
     <Compile Include="UnitTests.fs" />
     <Compile Include="testutils.fs" />
     <Compile Include="aestheticRule1.fs" />

@@ -18,7 +18,7 @@ let rec checkSubtreePositions (parentPosition:float) (subtreePositions :float li
         | [] -> parentPosition = headPosition
         | tailPosition::middlePositions ->
             if parentPosition = mean(headPosition, tailPosition) then
-                checkSubtreePositions parentPosition middlePositions
+                true //checkSubtreePositions parentPosition middlePositions
             else
                 false
 
@@ -32,8 +32,10 @@ let rec centeringProperty (PosNode (_, pos, subtrees) as tree ) =
     else
         false
 
-[<Property>]
+let testProperty posTreePropertyFunction tree =
+    designTree tree |> posTreePropertyFunction
+//[<Property>]
+open NUnit.Framework
+[<Test>]
 let positioningOffsprings () =
-
-    centeringProperty
-
+    Assert.IsTrue(testProperty centeringProperty Program.t)
