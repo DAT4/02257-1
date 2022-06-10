@@ -10,7 +10,10 @@ open NUnit.Framework
 open TestUtils
 
 let minimum_distance_check(t: Tree<'a>) = 
-    flatten t |> Seq.forall isOrdered 
+    let isInOrder xs = xs
+                       |> Seq.pairwise 
+                       |> Seq.forall (fun (a, b) -> a <= b-1.0)
+    flatten t |> Seq.forall isInOrder
 
 [<Test>]
 let aestheticrule1 () = 
