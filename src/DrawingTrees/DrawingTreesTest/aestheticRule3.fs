@@ -10,17 +10,17 @@ module AestheticRule3
 open TreeTypes
 open PositionedTree
 
-let rec reflect (PosNode(v, x, subtrees)) =
-    PosNode(v, -x, List.map reflect (List.rev subtrees))
+let rec reflect (Node(v, subtrees)) =
+    Node(v, List.map reflect (List.rev subtrees))
 
 let rec reflectpos (PosNode(v, x, subtrees)) =
-    PosNode(v, -x, List.map reflectpos subtrees)
+    PosNode(v, -x, List.map reflectpos  (List.rev subtrees))
 
 let symmetryProperty tree =
-    designTree tree = reflect (reflectpos (designTree tree))
+    designTree tree = reflectpos (designTree (reflect (tree)))
 
 //[<Property>]
 open NUnit.Framework
 [<Test>]
 let symmetryOfTrees () =
-    Assert.IsTrue(symmetryProperty Program.t)
+    Assert.IsTrue(symmetryProperty ExampleTrees.monster)
