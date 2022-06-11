@@ -17,12 +17,18 @@ By:
 
 #### Main Sections
 
-- [ ] Project Declaration
+- [ ] Abstract
+- [x] Project Declaration
 - [ ] Design of aesthetic pleasant renderings
   - [ ] Some of the nice to have
   - [ ] What if content size varies (Nice to have)
 - [x] Visualization of trees
 - [ ] Property based testing
+  - [ ] Generators
+  - [x] Test 1
+  - [x] Test 2
+  - [x] Test 3
+  - [ ] Test 4
 - [ ] Evaluation
 
 #### Other possible Sections
@@ -58,7 +64,7 @@ By:
   
 ### Tests
 
-- [ ] Property based 
+- [x] Property based 
   - [x] Two nodes at the same level should be placed at least a given distance apart.
   - [x] A parent should be centred over its offspring.
   - [x] Tree drawings should be symmetrical 
