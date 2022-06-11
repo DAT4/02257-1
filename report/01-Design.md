@@ -68,7 +68,7 @@ let rec blueprint (Node(x, xs)) =
     let resulttree          = PosNode(x, 0.0, ptrees)
     (resulttree, resultExtent)
 ```
-The blueprint takes a `Tree<'a>` as input and recursively goes through the subtrees to first identify the node postions using the extents, then move the trees and extents to the corresponding positions and then subsequently append them to the resulting tree and extent of the tree. The pair of these are then returned and, for clarity, two helper functions are used to get the first and second arguments, i.e.
+The blueprint takes a `Tree<'a>` as input and recursively goes through the subtrees to first identify the node postions using the extents, then move the trees and extents to the corresponding positions and subsequently append them to the resulting tree and extent of the tree and the pair of these are returned. For clarity, two helper functions are used to get the first and second arguments, i.e.
 ```fsharp
 let designTree (t: Tree<'a>) : PosTree<'a> =
     fst (blueprint t)
