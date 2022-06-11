@@ -6,23 +6,21 @@
 
 // Aesthethic 2: A parent should be centred over its offspring.
 module AestheticRule2
+open PositionedTree
 open FsCheck
 open FsCheck.NUnit
 open TreeTypes
 open TestUtils
 
-let rec centeringProperty (PosNode (_, _, subtrees) as tree ) =
-    match subtrees with
-    | [] -> true
-    | sts ->
-        let subtreePositions = subtrees |> List.map getSubtreePositions
-        if List.min subtreePositions = - List.max subtreePositions then
-            sts |> List.forall centeringProperty
-        else
-            false
-
-//[<Property>]
-open NUnit.Framework
-[<Test>]
-let positioningOffsprings () =
-    Assert.IsTrue(testProperty centeringProperty Program.t)
+[<Property(Arbitrary=[|typeof<TreeGenerator>|])>]
+let centeringProperty (t: Tree<char>) =
+    let rec f(PosNode (_, _, subtrees)) =
+        match subtrees with
+        | [] -> true
+        | sts ->
+            let subtreePositions = subtrees |> List.map getSubtreePositions
+            if List.min subtreePositions = - List.max subtreePositions then
+                sts |> List.forall f
+            else
+                false
+    f (designTree t)

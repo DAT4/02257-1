@@ -7,20 +7,15 @@
 // particular, this means that symmetric trees will be rendered symmetrically.
 // So, for example, Figure 1 shows two renderings, the first bad, the second good.
 module AestheticRule3
+open TestUtils
 open TreeTypes
 open PositionedTree
+open FsCheck.NUnit
 
-let rec reflect (Node(v, subtrees)) =
-    Node(v, List.map reflect (List.rev subtrees))
-
-let rec reflectpos (PosNode(v, x, subtrees)) =
-    PosNode(v, -x, List.map reflectpos  (List.rev subtrees))
-
-let symmetryProperty tree =
-    designTree tree = reflectpos (designTree (reflect (tree)))
-
-//[<Property>]
-open NUnit.Framework
-[<Test>]
-let symmetryOfTrees () =
-    Assert.IsTrue(symmetryProperty ExampleTrees.monster)
+[<Property(Arbitrary=[|typeof<TreeGenerator>|])>]
+let symmetryProperty (t: Tree<char>) =
+    let rec reflect (Node(v, subtrees)) =
+        Node(v, List.map reflect (List.rev subtrees))
+    let rec reflectpos (PosNode(v, x, subtrees)) =
+        PosNode(v, -x, List.map reflectpos  (List.rev subtrees))
+    designTree t = reflectpos (designTree (reflect (t)))

@@ -24,12 +24,12 @@ let testMeanDifferentInput2 () =
     let actual = mean (0.0, 3.0)
     Assert.AreEqual (expected, actual)
 
-open FsCheck
-open FsCheck.NUnit
-open TestUtils
+//open FsCheck
+//open FsCheck.NUnit
+//open TestUtils
 let meanSymmetryProp (a,b) = mean (a,b)=mean(b,a)
 
 
-[<Property(Arbitrary=[|typeof<MyNormalFloatGenerators>|])>]
-let symmetryOfMeanTest () =
-    meanSymmetryProp
+//[<Property(Arbitrary=[|typeof<MyNormalFloatGenerators>|])>]
+//let symmetryOfMeanTest () =
+//    meanSymmetryProp
