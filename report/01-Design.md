@@ -57,5 +57,24 @@ The basic functions used to construct the tree are:
  - `mean` determines the average of two trees
  - `fitlist` finds the `mean` of the left-fitted tree and the right-fitted tree to produce a tree that is fitted together and centered
 
-All these functions are used together in the `blueprint` function to build a tree. **need a little help here describing this**
+All these functions are used together in a function we call the `blueprint` function to build a tree
+```fsharp
+let rec blueprint (Node(x, xs)) =
+    List.unzip (List.map blueprint xs) |> fun (ts, es) -> 
+    let positions           = fitlist es 
+    let ptrees              = List.map (fun (v,t) -> moveTree v t) (List.zip positions ts )
+    let ptExtents           = List.map (fun (v,e) -> moveExtent v e) (List.zip positions es )
+    let resultExtent        = (0.0, 0.0) :: mergeExtentList ptExtents
+    let resulttree          = PosNode(x, 0.0, ptrees)
+    (resulttree, resultExtent)
+```
+The blueprint takes a `Tree<'a>` as input and recursively goes through the subtrees to first identify the node postions using the extents, then move the trees and extents to the corresponding positions and then subsequently append them to the resulting tree and extent of the tree. The pair of these are then returned and, for clarity, two helper functions are used to get the first and second arguments, i.e.
+```fsharp
+let designTree (t: Tree<'a>) : PosTree<'a> =
+    fst (blueprint t)
 
+let designExtents (t: Tree<'a>) : Extent = 
+    snd (blueprint t)
+```
+
+With the above code, it is possible to design trees that obey the four aesthetic rules stated in the beginning of this section. In the next section, we use property based testing for ensuring that the rules are endeed obeyed.
