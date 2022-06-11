@@ -1,15 +1,16 @@
-# Visualization of trees
+
+# 3   Visualization of trees
 
 To visualize the tree we will need to map the tree structure into an image. 
 
-In the case of a tree of single letters we would need the following objects for each node:
+In the case of a tree of single letters, i.e. trees of type `Tree<char>`, we would need the following objects for each node:
 
 - one letter
 - one line from letter to its parent (except the root node which does not have a parent)
 
-This task can easily be done using the SVG (Scalable Vector Graphics) format
+This task can easily be done using the SVG (Scalable Vector Graphics) format. As already meantioned in Sec. 2.3.1, the size of the value could easily be included, but we focus on the simple trees of type `Tree<char>` for simplicity.
 
-## SVG
+## 3.1   SVG
 
 SVG files are just text files following the XML (Extensible Markup Language) format.
 
@@ -33,7 +34,7 @@ And if we add a child to the root node we will also need a line between the node
 
 The SVG format depends on absolute coordinates in relation to the canvas of the image output where the x and y axis starts in the top left corner. So assuming we already have a correctly positioned tree using the code from the article, we can convert each node in the tree to a node which has a `x` and a `y` coordinate which will be used when plotting the node on the SVG.
 
-## Getting the absolute coordinates
+## 3.2   Getting the absolute coordinates
 
 Each node in the positioned tree has a position relative to its parent. To determine the absolute position of each node we need to first determine the absolute position of the root node. We already know the y coordinate of the root node because it is the one on the top of the canvas, so it is 0. To find the x coordinate of the root node we will need to find the outermost node in one of the sides of the tree and then accumulate the horizontal space all the way back to the root node. We can use the extends given by the `blueprint` function to find the coordinates of the horizontal poles of the Tree
 
@@ -43,7 +44,7 @@ let extremes (e: Extend): float*float =
     -List.min(lefts), List.max(rights)
 ```
 
-Then we can use the right extreme to compare with the right most element in each node while traversing to the down in the right side of the tree, when recursion is done each position will be returned and the root nodes absolute position in relation to the right side is given.
+Then we can use the right extreme to compare with the right most element in each node while traversing down in the right side of the tree, when recursion is done each position will be returned and the root nodes absolute position in relation to the right side is given.
 
 **TODO: This function should be refactored**
 ```fs
@@ -80,7 +81,7 @@ let absolutify (scale: int) (t: Tree<'a>) =
     out, (width * scale, depth * 2 * scale )
 ```
 
-## Mapping absolute coordinate tree to SVG image
+## 3.3   Mapping absolute coordinate tree to SVG image
 
 When the absolute positions of each node is already given the mapping to SVG is simple. We define the SVG frame using the width and the height and the content of the SVG file is given by mapping the coordinates and the value of the nodes to the text and the line SVG objects.
 
@@ -103,6 +104,6 @@ let draw (scale: int) (t: Tree<'a>) =
     svg (content (0,0) tree)
 ```
 
-## Fine tuning SVG by adding margin and centering letters
+## 3.4   Fine tuning SVG by adding margin and centering letters
 
 TODO

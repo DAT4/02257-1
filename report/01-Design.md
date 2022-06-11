@@ -1,4 +1,4 @@
-# Design of Aesthetically Pleasant Renderings
+# 1   Design of Aesthetically Pleasant Renderings
 The problem of designing aesthetically pleasant renderings of labelled trees using functional programming techniques is presented and described in Andrew J. Kennedy's paper, "Functional Pearls: Drawing Trees" from the Journal of Functional Programming. The paper presents four rules that an aesthetic tree must abide: 
 
 1. Two nodes at the same level should be placed at least a given distance apart.
@@ -9,10 +9,10 @@ particular, this means that symmetric trees will be rendered symmetrically.
 4. Identical subtrees should be rendered identically—their position in the larger
 tree should not affect their appearance.
 
-## Solution
+## 1.1   Solution
 The paper presents an explanation to the solution to this problem, as well as an implementation of that solution in Standard ML. In the following, we present our independent implementation of the solution in F#.
 
-### Representing Trees (Types)
+### 1.1.1   Representing Trees (Types)
 The tree is represented in our code using polymorphism so that nodes can be of any type.
 ```fsharp
 type Tree<'a> = Node of 'a * Tree<'a> list
@@ -40,7 +40,9 @@ The AbsPosTree type is also similar to a Tree, but it includes Coordinates.
 
 `type AbsPosTree<'a> = AbsPosNode of 'a * Coordinates * AbsPosTree<'a> list`
 
-### Building Trees
+Again, here we could have used the polymorphism of the `Tree<'a>`, but instead we have chosen to define a separate type for transparency.
+
+### 1.1.2   Building Trees
 
 To construct a tree, we followed the method presented in the paper. 
 
@@ -57,7 +59,7 @@ The basic functions used to construct the tree are:
  - `mean` determines the average of two floats.
  - `fitlist` finds the `mean` of the left-fitted tree and the right-fitted tree to produce a tree that is fitted together and centered.
 
-All these functions are used together in a function we call the `blueprint` function to build a tree
+All these functions are used together in a function we call `blueprint` to build a tree
 ```fsharp
 let rec blueprint (Node(x, xs)) =
     List.unzip (List.map blueprint xs) |> fun (ts, es) -> 
@@ -68,7 +70,7 @@ let rec blueprint (Node(x, xs)) =
     let resulttree          = PosNode(x, 0.0, ptrees)
     (resulttree, resultExtent)
 ```
-The blueprint takes a `Tree<'a>` as input and recursively goes through the subtrees to first identify the node postions using the extents, then move the trees and extents to the corresponding positions and subsequently append them to the resulting tree and extent of the tree and the pair of these are returned. For clarity, two helper functions are used to get the first and second arguments, i.e.
+The blueprint takes a `Tree<'a>` as input and recursively goes through the subtrees to first identify the node postions using the extents, then move the trees and extents to the corresponding positions and subsequently append them to the resulting tree and extent of the tree and the pair of these are returned. For transparency, two helper functions are used to get the first and second arguments, i.e.
 ```fsharp
 let designTree (t: Tree<'a>) : PosTree<'a> =
     fst (blueprint t)
