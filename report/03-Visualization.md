@@ -102,3 +102,7 @@ let draw (scale: int) (t: Tree<'a>) =
         | _ -> out + "\n" + (List.map (content (x,y)) cs |> (String.concat "\n"))
     svg (content (0,0) tree)
 ```
+
+## Fine tuning SVG by adding margin and centering letters
+
+TODO
