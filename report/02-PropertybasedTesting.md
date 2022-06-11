@@ -97,6 +97,6 @@ This is used to check that the drawings indeed are symmetrical with respect to r
 
 ## Rule 4
 'Identical subtrees should be rendered identically—their position in the larger
-tree should not affect their appearance. In Figure 2 the tree on the left fails
-the test, and the one on the right passes.'
+tree should not affect their appearance.'
 
+We test this rule by noticing that the `blueprint` function, that creates the positioned tree, recursively goes through the subtrees to first identify the node postions using the extents, then move the trees and extents to the corresponding positions. Due to the recursive nature, we only need to show that the extents and the trees are not altered by moving them.

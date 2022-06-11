@@ -7,6 +7,7 @@
 // the test, and the one on the right passes.
 module AestheticRule4
 open TreeTypes
+open PositionedTree
 open TestUtils
 
 let rec getListOfListOfPositions acc (PosNode(_, x, subtrees)) =
@@ -39,3 +40,17 @@ open NUnit.Framework
 [<Test>]
 let equalTreesAreIdentical () =
     Assert.IsTrue(testProperty equalTreesAreIdenticalProperty Program.t)
+
+(*
+let rec relativeDistanceToParent acc (PosNode(_, x, subtrees)) =
+    match subtrees with
+    | [] -> acc
+    | sts -
+
+let movingTreeIsUnalteredProperty x tree =
+    moveTree x tree = tree
+
+[<Test>]
+let movingTreeIsUnaltered () =
+    Assert.IsTrue(movingTreeIsUnalteredProperty 1.0 (designTree Program.t))
+*)
