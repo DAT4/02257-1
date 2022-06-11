@@ -3,6 +3,13 @@
 ![report](https://img.shields.io/github/workflow/status/dat4/02257-1/report?label=Report&style=for-the-badge)
 ![tests](https://img.shields.io/github/workflow/status/dat4/02257-1/.NET?label=TEST&style=for-the-badge)
 
+By:
+
+- Abby Audet, s212544
+- Johan Raunkjær Ott, s032060
+- Jinsong Li, s202354
+- Martin Mårtensson, s195469
+
 ## Tasks
 
 ### Report
