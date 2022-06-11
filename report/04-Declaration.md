@@ -11,7 +11,12 @@ Abby Audet(AA), Jinsong Li(JL), Johan Raunkjær Ott(JRA), and Martin Mårtensson
 | Implementation of absolute positioned tree |     |  x  |     |     |
 | Implementation of SVG visualization        |     |  x  |     |     |
 | Initial sketch of property based testing   | x   |     |     |     |
-| property based simple test                 | x   |     |     |     |
+| Simple property based test                 | x   |     |     |     |
+| Tree generator                             |     |  x  |     |     |
+| Aesthetic rule 1 test                      |     |  x  |  x  |     |
+| Aesthetic rule 2 test                      |  x  |     |     |     |
+| Aesthetic rule 3 test                      |  x  |     |     |     |
+| Aesthetic rule 4 test                      |  x  |     |     |     |
 
 ## 4.2   Report:
 
