@@ -6,7 +6,7 @@ module Visualization
 open PositionedTree
 open TreeTypes
 
-let extremes (e: Extend): float*float = 
+let extremes (e: Extent): float*float = 
     let (lefts, rights) = List.unzip ( e )
     -List.min(lefts), List.max(rights)
 
@@ -19,8 +19,8 @@ let firstPos (rightExtreme: float) (t : PosTree<'a>) : float =
     rightExtreme - f t
 
 let absolutify (scale: int) (t: Tree<'a>) =
-    let (tree, extends) = blueprint t
-    let (left, right)   = extremes extends 
+    let (tree, extents) = blueprint t
+    let (left, right)   = extremes extents 
     let width           = int((left + right) * 2.0)
     let start           = int(firstPos right tree) 
     let rec f (depth: int) (px: float) (PosNode(x, pos, cs)) =

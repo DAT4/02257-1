@@ -1,6 +1,7 @@
 // | Author(s)       | date    |
 //------------------------------
 // | AA              | June 10 |
+module ExampleTrees
 open TreeTypes
 
 // Symmetrical Tree

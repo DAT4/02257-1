@@ -1,5 +1,5 @@
 # Property-Based Testing: Validation of rendering properties
-In this section we describe how we test our implementation of designing aesthetically pleasant renderings of trees. We will describe the use of property based testing (PBT) for validating the four aesthetic rules described in [Functional Pearls: Drawing Trees]. Specifically, we use FsCheck.NUnit for integrating the FsCheck PBT tool into a unit testing framework. In separate subsections, we describe the four different aesthetic rules of the paper and specify how these rules can be described as boolean properties to be tested by FsCheck. Lastly, we analyze the notion of correctness as described in the paper and show how the correctness properties are tested, but first, we briefly describe how property based testing works with the simple case of the 'mean' function.
+In this section we describe how we test our implementation of designing aesthetically pleasant renderings of trees. We will describe the use of property based testing (PBT) for validating the four aesthetic rules described in [Functional Pearls: Drawing Trees]. Specifically, we use FsCheck.NUnit for integrating the FsCheck PBT tool into a unit testing framework. In separate subsections, we describe the four different aesthetic rules of the paper and specify how these rules can be described as boolean properties to be tested by FsCheck. First, we briefly describe how property based testing works with the simple case of the 'mean' function.
 
 ## Simple case - the mean function
 PBT concerns describing a property of a feature that should hold for all input and then test this for random input in order to ensure that the property holds for the implementation of the feature. The process is thus
@@ -33,25 +33,70 @@ With this we have shown a simple example on how to use PBT and some of the pitfa
 ## Rule 1
 'Two nodes at the same level should be placed at least a given distance apart.'
 
+In order to test this rule, a function for flattening a positioned tree by recursively going through the nodes, i.e.
+```fsharp
+let flatten (t: Tree<'a>) = 
+    let rec f d px (PosNode(_, pos, cs)) = (pos+px, d) :: List.collect (f (d+1) (pos+px)) cs 
+    f 0 0 (designTree t) |> List.groupBy (fun (_,d) -> d)
+                         |> List.map ( fun (_, xs) -> xs |> List.map (fun x -> fst x) )
+```
+This converts a positioned three into a list where the index corresponds to the depth in the three and the element is a list containing the positions of Nodes at that depth. At each depth, we then check that all nodes are at least a unit apart using the function
+```fsharp
+let minimum_distance_check(t: Tree<'a>) = 
+    let isInOrder xs = xs
+                       |> Seq.pairwise 
+                       |> Seq.forall (fun (a, b) -> a <= b-1.0)
+    flatten t |> Seq.forall isInOrder
+```
+This boolean function is used to describe the property that two nodes on the same level should be at least a given distance apart. 
+
+We note that we do not take the size of the node value into account. As a further requirement, one could include that the values of two nodes at the same level are not allowed to overlap. This could easily be included by finding the maximal size of the values of all the nodes in the three and scale the three with this unit. We have left this as an exercise for the reader.
 
 
 ## Rule 2
 'A parent should be centred over its offspring.'
 
+In order to test this rule, for each node, we compare the minimal and maximal positions of the subnodes and assert that the parent is indeed centered above these. Since the positions are relative to the parent this reduce to checking that the maximal position equals minus the minimal position. If this holds we recursively go through the subtrees to check that it holds throught the tree, i.e.
+```fsharp
+let rec centeringProperty (PosNode (_, _, subtrees) as tree ) =
+    match subtrees with
+    | [] -> true
+    | sts ->
+        let subtreePositions = subtrees |> List.map getSubtreePositions
+        if List.min subtreePositions = - List.max subtreePositions then
+            sts |> List.forall centeringProperty
+        else
+            false
+```
 
-
-
-
+This boolean function is used to describe the property that a parent should be centered above its subtrees.
 
 ## Rule 3
-'Tree drawings should be symmetrical with respect to reflection—a tree and
+'Tree drawings should be symmetrical with respect to reflection — a tree and
 its mirror image should produce drawings that are reflections of each other. In
-particular, this means that symmetric trees will be rendered symmetrically.
-So, for example, Figure 1 shows two renderings, the first bad, the second good.'
+particular, this means that symmetric trees will be rendered symmetrically.'
+
+We test this rule by noting that this corresponds to the symmetry property that changing the sign of the positions of a positioned tree along should be the same as finding the positioned three of a reversed tree. That is, by writing a function that reflect a three, e.g.
+```fsharp
+let rec reflect (Node(v, subtrees)) =
+    Node(v, List.map reflect (List.rev subtrees))
+```
+and a function that reflects a positioned three, e.g.
+```fsharp
+let rec reflectpos (PosNode(v, x, subtrees)) =
+    PosNode(v, -x, List.map reflectpos  (List.rev subtrees))
+```
+we have the symmetry property that
+```fsharp
+let symmetryProperty tree =
+    designTree tree = reflectpos (designTree (reflect (tree)))
+```
+This is used to check that the drawings indeed are symmetrical with respect to reflection. 
+
+
 
 ## Rule 4
 'Identical subtrees should be rendered identically—their position in the larger
-tree should not affect their appearance. In Figure 2 the tree on the left fails
-the test, and the one on the right passes.'
+tree should not affect their appearance.'
 
-## Correctness
+We test this rule by noticing that the `blueprint` function, that creates the positioned tree, recursively goes through the subtrees to first identify the node postions using the extents, then move the trees and extents to the corresponding positions. Due to the recursive nature, we only need to show that the extents and the trees are not altered by moving them.

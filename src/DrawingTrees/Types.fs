@@ -6,7 +6,7 @@
 module TreeTypes
 
 type Span = (float * float)
-type Extend = Span list
+type Extent = Span list
 type Coordinates = int * int
 
 type Tree<'a> = Node of 'a * Tree<'a> list
