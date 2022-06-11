@@ -17,7 +17,7 @@ let rec mergeExtent (ps : Extent) (qs: Extent) =
     | (ps, []) -> ps
     | ((p,_)::ps', (_,q)::qs') -> (p,q)::(mergeExtent ps' qs')
 
-let megergeExtentList (es: Extent list) = 
+let mergeExtentList (es: Extent list) = 
     List.fold mergeExtent [] es
 
 let rmax (p: float) (q: float) = 
@@ -53,7 +53,7 @@ let rec blueprint (Node(x, xs)) =
     let positions           = fitlist es 
     let ptrees              = List.map (fun (v,t) -> moveTree v t) (List.zip positions ts )
     let ptExtents           = List.map (fun (v,e) -> moveExtent v e) (List.zip positions es )
-    let resultExtent        = (0.0, 0.0) :: megergeExtentList ptExtents
+    let resultExtent        = (0.0, 0.0) :: mergeExtentList ptExtents
     let resulttree          = PosNode(x, 0.0, ptrees)
     (resulttree, resultExtent)
 
