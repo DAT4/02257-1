@@ -46,16 +46,16 @@ To construct a tree, we followed the method presented in the paper.
 
 The basic functions used to construct the tree are:
 
- - `moveTree` changes the horizontal position of a tree
- - `moveExtent` changes the horizontal position of an extent
- - `mergeExtent` merges two extents that don't overlap
- - `mergeExtentList` performs a `mergeExtent` on a list of extents
- - `rmax` determines which side a tree is on
- - `fit` recursively determines the minimum distance between two root nodes
- - `fitlistl` fits two trees together from the left
- - `fitlistr` fits two trees together from the right
- - `mean` determines the average of two trees
- - `fitlist` finds the `mean` of the left-fitted tree and the right-fitted tree to produce a tree that is fitted together and centered
+ - `moveTree` changes the horizontal position of a tree by changing the pos component of the root node.
+ - `moveExtent` changes the horizontal position of an extent by using a map to change the value of each span in the list.
+ - `mergeExtent` merges two extents that don't overlap using pattern matching to determine if either Extent list is empty, in which case we return the non-empty list, or, in the case where both lists are non-empty, we take the first float in the first span in the first list and the second float in the first span in the second list and concatenate that to a recursive call to mergeExtent using the rest of both lists.
+ - `mergeExtentList` performs a `mergeExtent` on a list of extents using a Fold.
+ - `rmax` returns the largest of two floats, used in fit to determine the minimum distance between root nodes.
+ - `fit` recursively determines the minimum distance between two root nodes by repeatedly taking the maximum of the distance between two nodes plus one, the minimum difference, and a recursive call to fit using the rest of the Extent.
+ - `fitlistl` recursively fits two trees together from the left by using pattern matching to merge each subtree.
+ - `fitlistr` recursively fits two trees together from the right by using pattern matching to merge each subtree, reversing the lists and the polarity of the recursive call to achieve a right-fit instead of a left-fit.
+ - `mean` determines the average of two floats.
+ - `fitlist` finds the `mean` of the left-fitted tree and the right-fitted tree to produce a tree that is fitted together and centered.
 
 All these functions are used together in a function we call the `blueprint` function to build a tree
 ```fsharp
@@ -77,4 +77,4 @@ let designExtents (t: Tree<'a>) : Extent =
     snd (blueprint t)
 ```
 
-With the above code, it is possible to design trees that obey the four aesthetic rules stated in the beginning of this section. In the next section, we use property based testing for ensuring that the rules are endeed obeyed.
+With the above code, it is possible to design trees that obey the four aesthetic rules stated in the beginning of this section. In the next section, we use property based testing to ensure that the rules are indeed obeyed.
