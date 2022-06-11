@@ -17,6 +17,7 @@ By:
 
 #### Main Sections
 
+- [ ] Abstract
 - [x] Project Declaration
 - [ ] Design of aesthetic pleasant renderings
   - [ ] Some of the nice to have
