@@ -38,7 +38,7 @@
   - [x] Scale positions for SVG
   - [x] Map absolute positioned trees to SVG
   - [x] No line on root node
-  - [ ] Move letter to center of position and shorten lines a bit
+  - [x] Move letter to center of position and shorten lines a bit
 - [x] Make generator for tests
 - [x] Make a set of trees to use when starting the program
   - [x] Symmetrical tree
