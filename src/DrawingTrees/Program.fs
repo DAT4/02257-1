@@ -50,7 +50,7 @@ let main(args) =
         | [] -> sprintf "pick one of -> visual | relative | abs" 
         | (x::_) -> 
             match x with 
-            | x when x = "visual" -> sprintf "%s" (draw 25 t)
+            | x when x = "visual" -> sprintf "%s" (draw 35 t)
             | x when x = "relative" -> sprintf "%A" (designTree t)
             | x when x = "abs" -> sprintf "%A" (absolutify 1 t)
             | _ -> sprintf "pick one of -> visual | relative | abs"
