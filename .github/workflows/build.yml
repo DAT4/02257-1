@@ -3,6 +3,9 @@ name: build
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'src/**'
+      - '!src/DrawingTrees/DrawingTreesTest/**'
   pull_request:
     branches: [ "main" ]
 
@@ -18,4 +21,4 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Build
-      run: dotnet build src/DrawingTrees/DrawingTreesTest
+      run: dotnet build src/DrawingTrees

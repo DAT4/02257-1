@@ -3,6 +3,8 @@ name: tests
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'src/DrawingTrees/DrawingTreesTest/**'
   pull_request:
     branches: [ "main" ]
 
