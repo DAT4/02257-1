@@ -39,7 +39,7 @@
   - [x] Map absolute positioned trees to SVG
   - [x] No line on root node
   - [ ] Move letter to center of position and shorten lines a bit
-- [ ] Make generator for tests
+- [x] Make generator for tests
 - [x] Make a set of trees to use when starting the program
   - [x] Symmetrical tree
   - [x] Identical sub trees
@@ -52,7 +52,7 @@
 
 - [ ] Property based 
   - [x] Two nodes at the same level should be placed at least a given distance apart.
-  - [ ] A parent should be centred over its offspring.
-  - [ ] Tree drawings should be symmetrical 
+  - [x] A parent should be centred over its offspring.
+  - [x] Tree drawings should be symmetrical 
   - [ ] Identical sub trees should be rendered identically—their
 - [ ] Unit tests
