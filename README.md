@@ -60,7 +60,7 @@ By:
   - [x] Simple tree
   - [x] Complex tree
   - [x] Trees from paper
-- [ ] Fix spelling mistakes in code
+- [x] Fix spelling mistakes in code
   
 ### Tests
 
