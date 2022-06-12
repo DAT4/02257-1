@@ -42,14 +42,18 @@ let absolutify (scale: int) (t: Tree<'a>) =
         let (t, d) = 
             match cs with 
             | []  -> [], depth
-            | _  -> List.map (f (depth+1) (pos+px)) cs |> List.unzip |> fun (t, d) -> t, List.max d
+            | _  -> List.map (f (depth+1) (pos+px)) cs 
+                        |> List.unzip 
+                        |> fun (t, d) -> t, List.max d
         AbsPosNode( x, (int((pos+px+left)*2.0)*scale, depth*2*scale),  t ), d 
     let (out, depth) = f 0 start tree 
     out, (width * scale, depth * 2 * scale )
 
 let draw (scale: int) (t: Tree<'a>) =
     let tree, (width, height) = absolutify scale t
-    let svg (content) = sprintf "<svg height=\"%i\" width=\"%i\">\n%s\n</svg>" (height+20) (width+20) content
+    let svg (content) = sprintf "<svg \
+                                  height=\"%i\" \
+                                  width=\"%i\">\n%s\n</svg>" (height+20) (width+20) content
 
     let text px py x y v = 
         let text = sprintf "<text x=\"%i\" \
