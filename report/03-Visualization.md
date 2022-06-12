@@ -46,8 +46,6 @@ let extremes (e: Extend): float*float =
 
 Then we can use the right extreme to compare with the right most element in each node while traversing down in the right side of the tree, when recursion is done each position will be returned and the root nodes absolute position in relation to the right side is given.
 
-**TODO: This function should be refactored**
-
 ```fsharp
 let firstPos (rightExtreme: float) (t : PosTree<'a>) : float = 
     let rec f (PosNode(_, pos, cs)) =  

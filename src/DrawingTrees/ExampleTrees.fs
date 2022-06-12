@@ -14,6 +14,40 @@
 module ExampleTrees
 open TreeTypes
 
+// Report tree
+let reportTree = Node("A", [
+            Node("B", []) ; 
+            Node("C", []) ;
+            Node("D", [
+                Node("D", [
+                    Node("E", []);
+                    Node("F", [])
+                    ])
+                ]);
+                Node("G", [
+                    Node("H", []) ;
+                    Node("I", []) ;
+                    Node("J", [
+                        Node("K", []) ;
+                        Node("L", [
+                            Node("M", []) ;
+                            Node("N", [
+                                Node("O", []) ;
+                                Node("P", []) ;
+                            ]) ;
+                        ]) ;
+                        Node("Q", []) ;
+                        Node("R", [
+                            Node("S", []) ;
+                            Node("T", [
+                                Node("U", []) ;
+                                Node("V", []) ;
+                            ]) ;
+                        ]) ;
+                    ]) ;
+                ])
+            ])
+
 // Symmetrical Tree
 let symTree = Node("A", [
                 Node("B", [

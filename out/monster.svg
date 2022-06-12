@@ -1,0 +1,112 @@
+<svg height="440" width="1455">
+<text x="710" y="10" text-anchor="middle" dy=".3em" fill="black" >"A"</text>
+
+<text x="185" y="80" text-anchor="middle" dy=".3em" fill="black" >"B"</text>
+<line x1="710" y1="18" x2="185" y2="70" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="115" y="150" text-anchor="middle" dy=".3em" fill="black" >"C"</text>
+<line x1="185" y1="88" x2="115" y2="140" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="80" y="220" text-anchor="middle" dy=".3em" fill="black" >"D"</text>
+<line x1="115" y1="158" x2="80" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="150" y="220" text-anchor="middle" dy=".3em" fill="black" >"E"</text>
+<line x1="115" y1="158" x2="150" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="150" y="290" text-anchor="middle" dy=".3em" fill="black" >"F"</text>
+<line x1="150" y1="228" x2="150" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="45" y="360" text-anchor="middle" dy=".3em" fill="black" >"G"</text>
+<line x1="150" y1="298" x2="45" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="115" y="360" text-anchor="middle" dy=".3em" fill="black" >"H"</text>
+<line x1="150" y1="298" x2="115" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="10" y="430" text-anchor="middle" dy=".3em" fill="black" >"I"</text>
+<line x1="115" y1="368" x2="10" y2="420" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="80" y="430" text-anchor="middle" dy=".3em" fill="black" >"J"</text>
+<line x1="115" y1="368" x2="80" y2="420" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="150" y="430" text-anchor="middle" dy=".3em" fill="black" >"K"</text>
+<line x1="115" y1="368" x2="150" y2="420" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="220" y="430" text-anchor="middle" dy=".3em" fill="black" >"L"</text>
+<line x1="115" y1="368" x2="220" y2="420" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="185" y="360" text-anchor="middle" dy=".3em" fill="black" >"M"</text>
+<line x1="150" y1="298" x2="185" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="290" y="360" text-anchor="middle" dy=".3em" fill="black" >"N"</text>
+<line x1="150" y1="298" x2="290" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="290" y="430" text-anchor="middle" dy=".3em" fill="black" >"O"</text>
+<line x1="290" y1="368" x2="290" y2="420" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="255" y="150" text-anchor="middle" dy=".3em" fill="black" >"P"</text>
+<line x1="185" y1="88" x2="255" y2="140" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="220" y="220" text-anchor="middle" dy=".3em" fill="black" >"Q"</text>
+<line x1="255" y1="158" x2="220" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="290" y="220" text-anchor="middle" dy=".3em" fill="black" >"R"</text>
+<line x1="255" y1="158" x2="290" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="605" y="80" text-anchor="middle" dy=".3em" fill="black" >"S"</text>
+<line x1="710" y1="18" x2="605" y2="70" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="430" y="150" text-anchor="middle" dy=".3em" fill="black" >"T"</text>
+<line x1="605" y1="88" x2="430" y2="140" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="360" y="220" text-anchor="middle" dy=".3em" fill="black" >"U"</text>
+<line x1="430" y1="158" x2="360" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="430" y="220" text-anchor="middle" dy=".3em" fill="black" >"V"</text>
+<line x1="430" y1="158" x2="430" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="500" y="220" text-anchor="middle" dy=".3em" fill="black" >"W"</text>
+<line x1="430" y1="158" x2="500" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="430" y="290" text-anchor="middle" dy=".3em" fill="black" >"X"</text>
+<line x1="500" y1="228" x2="430" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="430" y="360" text-anchor="middle" dy=".3em" fill="black" >"Y"</text>
+<line x1="430" y1="298" x2="430" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="605" y="290" text-anchor="middle" dy=".3em" fill="black" >"Z"</text>
+<line x1="500" y1="228" x2="605" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="500" y="360" text-anchor="middle" dy=".3em" fill="black" >"a"</text>
+<line x1="605" y1="298" x2="500" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="570" y="360" text-anchor="middle" dy=".3em" fill="black" >"b"</text>
+<line x1="605" y1="298" x2="570" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="640" y="360" text-anchor="middle" dy=".3em" fill="black" >"c"</text>
+<line x1="605" y1="298" x2="640" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="710" y="360" text-anchor="middle" dy=".3em" fill="black" >"d"</text>
+<line x1="605" y1="298" x2="710" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="815" y="150" text-anchor="middle" dy=".3em" fill="black" >"e"</text>
+<line x1="605" y1="88" x2="815" y2="140" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="745" y="220" text-anchor="middle" dy=".3em" fill="black" >"f"</text>
+<line x1="815" y1="158" x2="745" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="745" y="290" text-anchor="middle" dy=".3em" fill="black" >"g"</text>
+<line x1="745" y1="228" x2="745" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="815" y="220" text-anchor="middle" dy=".3em" fill="black" >"h"</text>
+<line x1="815" y1="158" x2="815" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="885" y="220" text-anchor="middle" dy=".3em" fill="black" >"i"</text>
+<line x1="815" y1="158" x2="885" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="885" y="290" text-anchor="middle" dy=".3em" fill="black" >"j"</text>
+<line x1="885" y1="228" x2="885" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="780" y="360" text-anchor="middle" dy=".3em" fill="black" >"k"</text>
+<line x1="885" y1="298" x2="780" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="850" y="360" text-anchor="middle" dy=".3em" fill="black" >"l"</text>
+<line x1="885" y1="298" x2="850" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="920" y="360" text-anchor="middle" dy=".3em" fill="black" >"m"</text>
+<line x1="885" y1="298" x2="920" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="990" y="360" text-anchor="middle" dy=".3em" fill="black" >"n"</text>
+<line x1="885" y1="298" x2="990" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1235" y="80" text-anchor="middle" dy=".3em" fill="black" >"o"</text>
+<line x1="710" y1="18" x2="1235" y2="70" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1235" y="150" text-anchor="middle" dy=".3em" fill="black" >"p"</text>
+<line x1="1235" y1="88" x2="1235" y2="140" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1060" y="220" text-anchor="middle" dy=".3em" fill="black" >"q"</text>
+<line x1="1235" y1="158" x2="1060" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="955" y="290" text-anchor="middle" dy=".3em" fill="black" >"r"</text>
+<line x1="1060" y1="228" x2="955" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1025" y="290" text-anchor="middle" dy=".3em" fill="black" >"s"</text>
+<line x1="1060" y1="228" x2="1025" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1095" y="290" text-anchor="middle" dy=".3em" fill="black" >"t"</text>
+<line x1="1060" y1="228" x2="1095" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1165" y="290" text-anchor="middle" dy=".3em" fill="black" >"u"</text>
+<line x1="1060" y1="228" x2="1165" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1340" y="220" text-anchor="middle" dy=".3em" fill="black" >"v"</text>
+<line x1="1235" y1="158" x2="1340" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1235" y="290" text-anchor="middle" dy=".3em" fill="black" >"w"</text>
+<line x1="1340" y1="228" x2="1235" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1305" y="290" text-anchor="middle" dy=".3em" fill="black" >"x"</text>
+<line x1="1340" y1="228" x2="1305" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1270" y="360" text-anchor="middle" dy=".3em" fill="black" >"y"</text>
+<line x1="1305" y1="298" x2="1270" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1340" y="360" text-anchor="middle" dy=".3em" fill="black" >"z"</text>
+<line x1="1305" y1="298" x2="1340" y2="350" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1375" y="290" text-anchor="middle" dy=".3em" fill="black" >"0"</text>
+<line x1="1340" y1="228" x2="1375" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1445" y="290" text-anchor="middle" dy=".3em" fill="black" >"1"</text>
+<line x1="1340" y1="228" x2="1445" y2="280" style="stroke:rgb(0,0,0);stroke-width:2"/>
+<text x="1410" y="220" text-anchor="middle" dy=".3em" fill="black" >"2"</text>
+<line x1="1235" y1="158" x2="1410" y2="210" style="stroke:rgb(0,0,0);stroke-width:2"/>
+</svg>

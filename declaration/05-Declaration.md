@@ -1,8 +1,8 @@
-# 5   Declaration
+# Declaration
 In alphabetic order, the following people contributed to Project 1:
 Abby Audet(AA), Jinsong Li(JL), Johan Raunkjær Ott(JRA), and Martin Mårtensson(MM).
 
-## 5.1   Implementation:
+## Implementation:
 
 | **Task**                                   | JRA |  MM |  JL |  AA |
 | ------------------------------------------ | :-: | :-: | :-: | :-: |
@@ -19,7 +19,7 @@ Abby Audet(AA), Jinsong Li(JL), Johan Raunkjær Ott(JRA), and Martin Mårtensson
 | Aesthetic rule 3 test                      |  x  |     |     |     |
 | Aesthetic rule 4 test                      |  x  |     |     |     |
 
-## 5.2   Report:
+## Report:
 
 | **Task**                                | JRA | MM  | JL  |  AA |
 | --------------------------------------- | :-: | :-: | :-: | :-: |   
@@ -28,7 +28,7 @@ Abby Audet(AA), Jinsong Li(JL), Johan Raunkjær Ott(JRA), and Martin Mårtensson
 | Visualization                           |  x  |  x  |     |     |
 | Evaluation                              |  x  |  x  |     |     |
 
-## 5.3   Analysis and discussion:
+## Analysis and discussion:
 AA, JL, JRA, and MM all contributed in general analysis and discussions of the problems at hand.
 
 

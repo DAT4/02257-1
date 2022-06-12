@@ -1,6 +1,8 @@
-# 4   Evaluation
-In the current report, we present the implementation in F# of a method to automatically structure trees such that they obey certain aesthical rules. The solution is built on recursively arranging the nodes of the tree to allow the 
+# 4 Evaluation
 
+We have learnt:
 
- method in `F#` that is able to automatically structure trees such that they obey certain aesthical rules. It is validated that the rules are obeyed by using property based testing where FsCheck is used to generate randomly generated input using our own implementation of a random tree generator. Finally, we present a methodology for visualizing the trees by converting to SVG format.
-
+- To use the function language F# by implementing a methodology to automatically structure trees such that they obey certain aesthetic rules.
+- With f# how to represent a nested data structure visually with SVG.
+- How to use property based testing to ensure the validity of the implementation.
+- Generating arbitrary test data of a nested data structure in a safe way to avoid stack overflow because of infinite recursion.

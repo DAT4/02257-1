@@ -14,7 +14,7 @@ jobs:
         uses: docker://pandoc/latex:2.9
         with:
           entrypoint: /bin/sh
-          args: -c "mkdir output;pandoc --template report/template/latex.template -V breakurl -V hyphens=URL --pdf-engine=xelatex -o report.pdf report/*.md"
+          args: -c "pandoc --toc --template report/template/latex.template -V breakurl -V hyphens=URL --pdf-engine=xelatex -o report.pdf report/*.md"
       - run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions"

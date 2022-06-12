@@ -23,56 +23,26 @@
 // Author: Johan Ott 
 // Date:   Tue Jun 7 13:46:07 
 
-open TreeTypes
-open PositionedTree
+open ExampleTrees
 open Visualization
-
-//let x = Node("A", [Node("B", []) ; Node("B", []) ; Node("C", []) ; Node("D", [])])
-//let x = Node("A", [Node("B", []) ; Node("C", []) ; Node("D", []) ])
-let t = Node("A", [
-            Node("B", []) ; 
-            Node("C", []) ;
-            Node("D", [
-                Node("D", [
-                    Node("E", []);
-                    Node("F", [])
-                    ])
-                ]);
-                Node("G", [
-                    Node("H", []) ;
-                    Node("I", []) ;
-                    Node("J", [
-                        Node("K", []) ;
-                        Node("L", [
-                            Node("M", []) ;
-                            Node("N", [
-                                Node("O", []) ;
-                                Node("P", []) ;
-                            ]) ;
-                        ]) ;
-                        Node("Q", []) ;
-                        Node("R", [
-                            Node("S", []) ;
-                            Node("T", [
-                                Node("U", []) ;
-                                Node("V", []) ;
-                            ]) ;
-                        ]) ;
-                    ]) ;
-                ])
-            ])
 
 [<EntryPoint>]
 let main(args) =
     let l = List.ofArray args
     let z = 
         match (l) with
-        | [] -> sprintf "pick one of -> visual | relative | abs" 
+        | [] -> sprintf "pick one of -> reportTree | symTree | idSubTree | simpleTree | complexTree | tree1 | tree2 | monster | pathTree " 
         | (x::_) -> 
             match x with 
-            | x when x = "visual" -> sprintf "%s" (draw 35 t)
-            | x when x = "relative" -> sprintf "%A" (designTree t)
-            | x when x = "abs" -> sprintf "%A" (absolutify 1 t)
+            | x when x = "reportTree" -> sprintf "%s" (draw 35 reportTree)
+            | x when x = "symTree" -> sprintf "%s" (draw 35 symTree)
+            | x when x = "idSubTree" -> sprintf "%s" (draw 35 idSubTree)
+            | x when x = "simpleTree" -> sprintf "%s" (draw 35 simpleTree)
+            | x when x = "complexTree" -> sprintf "%s" (draw 35 complexTree)
+            | x when x = "tree1" -> sprintf "%s" (draw 35 tree1)
+            | x when x = "tree2" -> sprintf "%s" (draw 35 tree2)
+            | x when x = "monster" -> sprintf "%s" (draw 35 monster)
+            | x when x = "pathTree" -> sprintf "%s" (draw 35 pathTree)
             | _ -> sprintf "pick one of -> visual | relative | abs"
     printfn "%s" z
     0

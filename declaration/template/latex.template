@@ -389,7 +389,7 @@ $else$
 % ------ Title ------
 \hrule % Make line
 \vspace{0.5cm} 
-\textbf{Project 1 - Functional Pearls - Drawing Trees}
+\textbf{Project 1 - Declaration}
 \vspace{.5cm}
 \hrule % Make line
 
@@ -429,14 +429,7 @@ $if(colorlinks)$
 $endif$
 \setcounter{tocdepth}{$toc-depth$}
 \tableofcontents
-\thispagestyle{empty}
 \vfill
-\begin{center}
-\includegraphics[width=\textwidth]{report/images/visual.png}
-\end{center}
-\vfill
-\pagebreak
-\setcounter{page}{1}
 $endif$
 $if(lof)$
 \listoffigures

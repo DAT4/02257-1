@@ -2,13 +2,10 @@
 # 1   Design of Aesthetically Pleasant Renderings
 The problem of designing aesthetically pleasant renderings of labelled trees using functional programming techniques is presented and described in Andrew J. Kennedy's paper, "Functional Pearls: Drawing Trees" from the Journal of Functional Programming. The paper presents four rules that an aesthetic tree must abide: 
 
-1. Two nodes at the same level should be placed at least a given distance apart.
-2. A parent should be centred over its offspring.
-3. Tree drawings should be symmetrical with respect to reflection—a tree and
-its mirror image should produce drawings that are reflections of each other. In
-particular, this means that symmetric trees will be rendered symmetrically.
-4. Identical subtrees should be rendered identically—their position in the larger
-tree should not affect their appearance.
+1. Two nodes at the same level are placed a given distance apart.
+2. A parent should be centered above its immediate children.
+3. Drawings must be symmetric with respect to reflection.
+4. Isomorphic sub trees have Isomorphic renderings
 
 ## 1.1   Solution
 The paper presents an explanation to the solution to this problem, as well as an implementation of that solution in Standard ML. In the following, we present our independent implementation of the solution in F#.
@@ -35,11 +32,15 @@ Notice that this differs from the article, where polymorphism of the Tree type i
 Finally, we created two datatypes that are used for the visualization of the tree. 
 The Coordinates type is a pair of ints that represent a horizontal and vertical position given a unit measure.
 
-`type Coordinates = int * int`
+```fsharp
+type Coordinates = int * int
+```
 
 The AbsPosTree type is also similar to a Tree, but it includes Coordinates.
 
-`type AbsPosTree<'a> = AbsPosNode of 'a * Coordinates * AbsPosTree<'a> list`
+```fsharp
+type AbsPosTree<'a> = AbsPosNode of 'a * Coordinates * AbsPosTree<'a> list
+```
 
 Again, here we could have used the polymorphism of the `Tree<'a>`, but instead we have chosen to define a separate type for transparency.
 
@@ -49,16 +50,16 @@ To construct a tree, we followed the method presented in the paper.
 
 The basic functions used to construct the tree are:
 
- - `moveTree` changes the horizontal position of a tree by changing the pos component of the root node.
- - `moveExtent` changes the horizontal position of an extent by using a map to change the value of each span in the list.
- - `mergeExtent` merges two extents that don't overlap using pattern matching to determine if either Extent list is empty, in which case we return the non-empty list, or, in the case where both lists are non-empty, we take the first float in the first span in the first list and the second float in the first span in the second list and concatenate that to a recursive call to mergeExtent using the rest of both lists.
+ - `moveTree` changes the horizontal position of a tree.
+ - `moveExtent` changes the horizontal position of an extent.
+ - `mergeExtent` merges two extents that don't overlap.
  - `mergeExtentList` performs a `mergeExtent` on a list of extents using a Fold.
- - `rmax` returns the largest of two floats, used in fit to determine the minimum distance between root nodes.
- - `fit` recursively determines the minimum distance between two root nodes by repeatedly taking the maximum of the distance between two nodes plus one, the minimum difference, and a recursive call to fit using the rest of the Extent.
- - `fitlistl` recursively fits two trees together from the left by using pattern matching to merge each subtree.
- - `fitlistr` recursively fits two trees together from the right by using pattern matching to merge each subtree, reversing the lists and the polarity of the recursive call to achieve a right-fit instead of a left-fit.
+ - `rmax` returns the largest of two floats.
+ - `fit` recursively determines the minimum distance between two root nodes.
+ - `fitlistl` recursively fits two trees together from the left.
+ - `fitlistr` recursively fits two trees together from the right.
  - `mean` determines the average of two floats.
- - `fitlist` finds the `mean` of the left-fitted tree and the right-fitted tree to produce a tree that is fitted together and centered.
+ - `fitlist` finds the `mean` of the left- and right-fitted trees to produce a centered tree.
 
 All these functions are used together in a function we call `blueprint` to build a tree
 ```fsharp

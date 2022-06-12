@@ -44,7 +44,7 @@ let tree<'a> =
     Gen.sized tree'
 ```
 
-The function `tree'` will recursively generate an arbitrary tree of arbitrary type where each node has between 0 and 5 children nodes. The reason that only 5 children is allowed is that the test will be extremely slow with a higher amount.
+The function `tree'` will recursively generate an arbitrary tree of arbitrary type where each node has between 0 and 5 children nodes. The reason that 5 children is the upper limit, is that the test will be extremely slow with a higher amount.
 
 When testing the data we need to specify a type, because we can't test generic types. So when we implement a type which implements the Arbitrary interface we will specify the type as char.
 
