@@ -1,8 +1,28 @@
-﻿// | Author(s)       | date    |
-//------------------------------
-// | JRA             | June 2  |
-// | AA, JL, JRA, MM | June 3  |
-// | MM              | June 8  |
+﻿// --------------------------------------------------
+// ./src/DrawingTrees/Program.fs
+// --------------------------------------------------
+// 
+// Author: Martin Maartensson 
+// Date:   Sat Jun 11 12:26:14 
+// 
+// Author: Martin Maartensson 
+// Date:   Fri Jun 10 14:52:47 
+// 
+// Author: Martin Maartensson 
+// Date:   Thu Jun 9 17:20:49 
+// 
+// Author: Johan Ott 
+// Date:   Thu Jun 9 15:38:44 
+// 
+// Author: Martin Maartensson 
+// Date:   Thu Jun 9 12:23:24 
+// 
+// Author: Martin Maartensson 
+// Date:   Thu Jun 9 11:01:38 
+// 
+// Author: Johan Ott 
+// Date:   Tue Jun 7 13:46:07 
+
 open TreeTypes
 open PositionedTree
 open Visualization

@@ -1,7 +1,28 @@
-// | Author(s)       | date    |
-//------------------------------
-// | JRA             | June 8  |
-// | JRA             | June 10 |
+// --------------------------------------------------
+// ./src/DrawingTrees/DrawingTreesTest/aestheticRule4.fs
+// --------------------------------------------------
+// 
+// Author: Martin Maartensson 
+// Date:   Sat Jun 11 11:50:52 
+// 
+// Author: Johan Ott 
+// Date:   Sat Jun 11 04:05:43 
+// 
+// Author: Johan Ott 
+// Date:   Sat Jun 11 03:19:40 
+// 
+// Author: Johan Ott 
+// Date:   Sat Jun 11 00:15:00 
+// 
+// Author: Johan Ott 
+// Date:   Thu Jun 9 15:38:44 
+// 
+// Author: Johan Ott 
+// Date:   Wed Jun 8 11:58:52 
+// 
+// Author: Johan Ott 
+// Date:   Wed Jun 8 10:33:08 
+
 // Aesthethic 4:  Identical subtrees should be rendered identically—their position in the larger 
 // tree should not affect their appearance. In Figure 2 the tree on the left fails 
 // the test, and the one on the right passes.

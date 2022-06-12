@@ -1,7 +1,28 @@
-// | Author(s)       | date    |
-//------------------------------
-// | JRA, MM         | June 9  |
-// | JRA, MM         | June 10 |
+// --------------------------------------------------
+// ./src/DrawingTrees/DrawingTreesTest/testutils.fs
+// --------------------------------------------------
+// 
+// Author: Johan Ott 
+// Date:   Sat Jun 11 21:57:09 
+// 
+// Author: Johan Ott 
+// Date:   Sat Jun 11 21:50:43 
+// 
+// Author: Martin Maartensson 
+// Date:   Sat Jun 11 11:50:52 
+// 
+// Author: Johan Ott 
+// Date:   Sat Jun 11 00:15:00 
+// 
+// Author: Johan Ott 
+// Date:   Fri Jun 10 20:56:46 
+// 
+// Author: Martin Maartensson 
+// Date:   Fri Jun 10 14:52:39 
+// 
+// Author: Martin Maartensson 
+// Date:   Fri Jun 10 13:09:59 
+
 module TestUtils
 open TreeTypes
 open PositionedTree

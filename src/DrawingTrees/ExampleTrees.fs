@@ -1,6 +1,16 @@
-// | Author(s)       | date    |
-//------------------------------
-// | AA              | June 10 |
+// --------------------------------------------------
+// ./src/DrawingTrees/ExampleTrees.fs
+// --------------------------------------------------
+// 
+// Author: Abby Audet 
+// Date:   Fri Jun 10 16:05:47 
+// 
+// Author: Abby Audet 
+// Date:   Fri Jun 10 14:53:19 
+// 
+// Author: Abby Audet 
+// Date:   Fri Jun 10 14:47:25 
+
 module ExampleTrees
 open TreeTypes
 

@@ -1,7 +1,31 @@
-// | Author(s)       | date    |
-//------------------------------
-// | JRA             | June 8  |
-// | JRA             | June 10 |
+// --------------------------------------------------
+// ./src/DrawingTrees/DrawingTreesTest/aestheticRule3.fs
+// --------------------------------------------------
+// 
+// Author: Martin Maartensson 
+// Date:   Sat Jun 11 11:50:52 
+// 
+// Author: Johan Ott 
+// Date:   Fri Jun 10 22:12:50 
+// 
+// Author: Johan Ott 
+// Date:   Fri Jun 10 21:03:28 
+// 
+// Author: Johan Ott 
+// Date:   Fri Jun 10 20:56:46 
+// 
+// Author: Johan Ott 
+// Date:   Fri Jun 10 20:39:21 
+// 
+// Author: Johan Ott 
+// Date:   Thu Jun 9 15:38:44 
+// 
+// Author: Johan Ott 
+// Date:   Wed Jun 8 11:58:52 
+// 
+// Author: Johan Ott 
+// Date:   Wed Jun 8 10:33:08 
+
 // Aesthethic 3: Tree drawings should be symmetrical with respect to reflection—a tree and
 // its mirror image should produce drawings that are reflections of each other. In
 // particular, this means that symmetric trees will be rendered symmetrically.
