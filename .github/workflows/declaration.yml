@@ -1,0 +1,27 @@
+name: declaration
+on:
+  push:
+    paths:
+      - 'declaration/**'
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: convert md to pdf
+        uses: docker://pandoc/latex:2.9
+        with:
+          entrypoint: /bin/sh
+          args: -c "mkdir output;pandoc --template declaration/template/latex.template -V breakurl -V hyphens=URL --pdf-engine=xelatex -o declaration.pdf declaration/*.md"
+      - run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions"
+          git add declaration.pdf
+          git commit -m "Compile declaration" -a
+        shell: bash
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
