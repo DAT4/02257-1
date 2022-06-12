@@ -38,7 +38,7 @@ The SVG format depends on absolute coordinates in relation to the canvas of the 
 
 Each node in the positioned tree has a position relative to its parent. To determine the absolute position of each node we need to first determine the absolute position of the root node. We already know the y coordinate of the root node because it is the one on the top of the canvas, so it is 0. To find the x coordinate of the root node we will need to find the outermost node in one of the sides of the tree and then accumulate the horizontal space all the way back to the root node. We can use the extends given by the `blueprint` function to find the coordinates of the horizontal poles of the Tree
 
-```fs
+```fsharp
 let extremes (e: Extend): float*float = 
     let (lefts, rights) = List.unzip ( e )
     -List.min(lefts), List.max(rights)
@@ -47,7 +47,8 @@ let extremes (e: Extend): float*float =
 Then we can use the right extreme to compare with the right most element in each node while traversing down in the right side of the tree, when recursion is done each position will be returned and the root nodes absolute position in relation to the right side is given.
 
 **TODO: This function should be refactored**
-```fs
+
+```fsharp
 let firstPos (rightExtreme: float) (t : PosTree<'a>) : float = 
     let rec f (PosNode(_, pos, cs)) =  
         match (pos, cs) with 
@@ -65,17 +66,19 @@ All number values used in the trees and extends are floats but in SVG we will ne
 
 The inner function will recursively traverse through the tree and apply the absolute positions for the x and y coordinates to each node. At last the absolute positioned tree will be returned in a tuple together with the width and the height of the whole frame.
 
-```fs
+```fsharp
 let absolutify (scale: int) (t: Tree<'a>) =
-    let (tree, extends) = blueprint t
-    let (left, right)   = extremes extends 
+    let (tree, extents) = blueprint t
+    let (left, right)   = extremes extents 
     let width           = int((left + right) * 2.0)
     let start           = int(firstPos right tree) 
     let rec f (depth: int) (px: float) (PosNode(x, pos, cs)) =
         let (t, d) = 
             match cs with 
             | []  -> [], depth
-            | _  -> List.map (f (depth+1) (pos+px)) cs |> List.unzip |> fun (t, d) -> t, List.max d
+            | _  -> List.map (f (depth+1) (pos+px)) cs 
+                        |> List.unzip 
+                        |> fun (t, d) -> t, List.max d
         AbsPosNode( x, (int((pos+px+left)*2.0)*scale, depth*2*scale),  t ), d 
     let (out, depth) = f 0 start tree 
     out, (width * scale, depth * 2 * scale )
@@ -85,15 +88,25 @@ let absolutify (scale: int) (t: Tree<'a>) =
 
 When the absolute positions of each node is already given the mapping to SVG is simple. We define the SVG frame using the width and the height and the content of the SVG file is given by mapping the coordinates and the value of the nodes to the text and the line SVG objects.
 
-```fs
+```fsharp
 let draw (scale: int) (t: Tree<'a>) =
     let tree, (width, height) = absolutify scale t
-    let svg (content) = sprintf "<svg height=\"%i\" width=\"%i\">\n%s\n</svg>" height width content
+    let svg (content) = sprintf "<svg \
+                                  height=\"%i\" \
+                                  width=\"%i\">\n%s\n</svg>" (height+20) (width+20) content
 
     let text px py x y v = 
-        let text = sprintf "<text x=\"%i\" y=\"%i\" fill=\"black\">%A</text>\n" x y v
-        let line = sprintf "<line x1=\"%i\" y1=\"%i\" x2=\"%i\" y2=\"%i\" \
-	                    style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" px py x y
+        let text = sprintf "<text x=\"%i\" \
+	                          y=\"%i\" \
+				  text-anchor=\"middle\" \
+				  dy=\".3em\" \
+				  fill=\"black\" \
+				  >%A</text>\n" (x+10) (y+10) v
+        let line = sprintf "<line x1=\"%i\" \
+	                          y1=\"%i\" \
+				  x2=\"%i\" \
+				  y2=\"%i\" \
+				  style=\"stroke:rgb(0,0,0);stroke-width:2\"/>" (px+10) (py+18) (x+10) (y)
         if (px+py) = 0 then text else text+line
 
     let rec content (px: int, py: int) (AbsPosNode(v, (x, y), cs)) =
@@ -104,6 +117,10 @@ let draw (scale: int) (t: Tree<'a>) =
     svg (content (0,0) tree)
 ```
 
-## 3.4   Fine tuning SVG by adding margin and centering letters
+By default letters in SVG has the height of .6em and are being positioned with their bottom left corner on the coordinate given. Since we don't want that, we need to modify the position of the letters. This has been done by adding the tag `text-anchor="middle"` which is horizontally placing the letter in the center of the point given by the x and y variables. To center the letter vertically we will use the `dy` variables to lower the position by half the height of the letter. So we are setting `dy=.3em`. 
 
-TODO
+Another problem is that the lines overlap the letters. And this problem is solved by shortening the length of the lines in each side by changing the y coordinate so that the parent y coordinate becomes 8 px higher than the center point of the parent and the child y coordinate becomes 10 px lower than the center point of the child.
+
+The last problem is that the canvas frame is created directly from the extreme points coordinates which means the points are on the line of the frame and that makes half of the letters on the edge to go out of the frame. To solve this problem we add a margin by moving all the points 10px to the right and 10px down and make the height and the width of the frame 20px larger.
+
+The constants applied in this will not be affected by changes of the scale as long the stroke width of lines and font size of letters remain the same.
