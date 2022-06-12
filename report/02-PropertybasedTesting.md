@@ -30,6 +30,38 @@ With this we have shown a simple example on how to use PBT and some of the pitfa
 
 ## 2.2   Generators
 
+For the property based test we will need to generate arbitrary trees which are not infinite, and for that we will implement a custom generator 
+
+```fsharp
+let tree<'a> =
+    let rec tree' s =
+        match s with
+        | 0 -> Gen.map (fun v -> Node(v, [])) Arb.generate<'a>
+        | n when n>0 ->
+            let subtrees = tree' (n/2)  |> Gen.sample 0 5 |> Gen.constant 
+            Gen.map2 (fun v ts -> Node(v, ts)) Arb.generate<'a> subtrees 
+        | _ -> invalidArg "s" "Only positive args are allowed"
+    Gen.sized tree'
+```
+
+The function `tree'` will recursively generate an arbitrary tree of arbitrary type where each node has between 0 and 5 children nodes. The reason that only 5 children is allowed is that the test will be extremely slow with a higher amount.
+
+When testing the data we need to specify a type, because we can't test generic types. So when we implement a type which implements the Arbitrary interface we will specify the type as char.
+
+```fsharp
+type TreeGenerator =
+    static member Tree() =
+        {new Arbitrary<Tree<char>>() with
+            override x.Generator = tree<char>
+            override x.Shrinker t = Seq.empty }
+```
+
+The reason we implement the TreeGenerator as an Arbitrary interface is to register it so that it will be recognized as a valid type when annotating the property based tests.
+
+```fsharp
+Arb.register<TreeGenerator>() |> ignore
+```
+
 
 ## 2.3   Testing the aesthetic rules
 We are now ready for testing the aesthetic rules which is done in the subsequent four subsections. 
@@ -38,6 +70,7 @@ We are now ready for testing the aesthetic rules which is done in the subsequent
 'Two nodes at the same level should be placed at least a given distance apart.'
 
 In order to test this rule, ew defined a function for flattening a positioned tree by recursively going through the nodes, i.e.
+
 ```fsharp
 let flatten (t: Tree<'a>) = 
     let rec f d px (PosNode(_, pos, cs)) = (pos+px, d) :: List.collect (f (d+1) (pos+px)) cs 
@@ -61,6 +94,7 @@ We note that we do not take the size of the node value into account. As a furthe
 'A parent should be centred over its offspring.'
 
 In order to test this rule, for each node, we compare the minimal and maximal positions of the subnodes and assert that the parent is indeed centered above these. Since the positions are relative to the parent this reduce to checking that the maximal position equals minus the minimal position. If this holds, we recursively go through the subtrees to check that it holds throughout the tree, i.e.
+
 ```fsharp
 let rec centeringProperty (PosNode (_, _, subtrees) as tree ) =
     match subtrees with
@@ -81,16 +115,19 @@ its mirror image should produce drawings that are reflections of each other. In
 particular, this means that symmetric trees will be rendered symmetrically.'
 
 We test this rule by noting that this corresponds to the symmetry property that changing the sign of the positions of a positioned tree should be the same as finding the positioned tree of a reversed tree. That is, by writing a function that reflect a tree, e.g.
+
 ```fsharp
 let rec reflect (Node(v, subtrees)) =
     Node(v, List.map reflect (List.rev subtrees))
 ```
 and a function that reflects a positioned tree, e.g.
+
 ```fsharp
 let rec reflectpos (PosNode(v, x, subtrees)) =
     PosNode(v, -x, List.map reflectpos  (List.rev subtrees))
 ```
 we have the symmetry property that
+
 ```fsharp
 let symmetryProperty tree =
     designTree tree = reflectpos (designTree (reflect (tree)))
