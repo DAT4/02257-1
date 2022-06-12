@@ -1,3 +1,4 @@
+
 # 1   Design of Aesthetically Pleasant Renderings
 The problem of designing aesthetically pleasant renderings of labelled trees using functional programming techniques is presented and described in Andrew J. Kennedy's paper, "Functional Pearls: Drawing Trees" from the Journal of Functional Programming. The paper presents four rules that an aesthetic tree must abide: 
 
