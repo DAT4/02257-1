@@ -140,4 +140,23 @@ This is used to check that the drawings indeed are symmetrical with respect to r
 'Identical subtrees should be rendered identically—their position in the larger
 tree should not affect their appearance.'
 
-We test this rule by noticing that the `blueprint` function, that creates the positioned tree, recursively goes through the subtrees to first identify the node postions using the extents, then move the trees and extents to the corresponding positions. Due to the recursive nature, we only need to show that the extents and the trees are not altered by moving them.
+We test this rule by noticing that the `blueprint` function, that creates the positioned tree, recursively goes through the subtrees to first identify the node postions using the extents, then move the trees and extents to the corresponding positions. Due to the recursive nature, we only need to show that the trees are not altered by moving them. We thus define a function to compare the shapes of two trees
+```fsharp
+let rec compareTreeShapes (tree1 : PosTree<'a>, tree2 : PosTree<'a>) =
+    match  (tree1, tree2) with
+    | (PosNode(_, _, subtrees1), PosNode(_, _, subtrees2))
+        when List.length subtrees1 <> List.length subtrees2 -> false
+    | (PosNode(_, x1, subtrees1), PosNode(_, x2, subtrees2)) ->
+		let comparePositions (PosNode(_, subtreex1, _)) (PosNode(_, subtreex2, _)) =
+			subtreex1 = subtreex2
+        List.forall2 comparePositions subtrees1 subtrees2
+            && List.zip subtrees1 subtrees2  |> List.forall compareTreeShapes
+```
+
+Then the property to be tested can be written as
+```fsharp
+let movingTreeIsUnalteredProperty x tree =
+    compareTreeShapes ((moveTree x tree), tree)
+```
+
+In principle, we would have liked to make a black box test by making a function that recursively compared all subtrees of same shape in a tree, but this was left out due to time considerations.

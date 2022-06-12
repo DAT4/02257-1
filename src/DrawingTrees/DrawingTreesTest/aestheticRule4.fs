@@ -35,14 +35,16 @@ open PositionedTree
 open TestUtils
 open FsCheck.NUnit
 
-let comparePositions (PosNode(_, subtreex1, _)) (PosNode(_, subtreex2, _)) =
-    subtreex1 = subtreex2
+
 
 let rec compareTreeShapes (tree1 : PosTree<'a>, tree2 : PosTree<'a>) =
+
     match  (tree1, tree2) with
     | (PosNode(_, _, subtrees1), PosNode(_, _, subtrees2))
         when List.length subtrees1 <> List.length subtrees2 -> false
     | (PosNode(_, x1, subtrees1), PosNode(_, x2, subtrees2)) ->
+        let comparePositions (PosNode(_, subtree1, _)) (PosNode(_, subtree2, _)) =
+            subtree1 = subtree2
         List.forall2 comparePositions subtrees1 subtrees2
             && List.zip subtrees1 subtrees2  |> List.forall compareTreeShapes
 
