@@ -13,6 +13,8 @@ date: \today
 geometry: margin=2cm
 
 output: pdf_document
+fontsize: 11pt
 ---
 
+![](report/images/visual.png)
 \pagebreak

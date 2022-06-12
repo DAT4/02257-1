@@ -14,7 +14,7 @@ read:
 publish:
 	pandoc --toc --template report/template/latex.template -V breakurl -V hyphens=URL --pdf-engine=xelatex -o local_report.pdf report/*.md 
 visual:
-	dotnet run --project src/DrawingTrees/ visual > visual.svg && inkscape visual.svg
+	dotnet run --project src/DrawingTrees/ visual > out/visual.svg && inkscape out/visual.svg -o out/visual.png
 
 test:
 	dotnet test src/DrawingTrees/DrawingTreesTest 
