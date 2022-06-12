@@ -40,7 +40,7 @@ open TestUtils
 
 [<Property(Arbitrary=[|typeof<TreeGenerator>|])>]
 let minimum_distance_check(t: Tree<char>) = 
-    let isInOrder xs = xs
+    let check_per_layer xs = xs
                        |> Seq.pairwise 
                        |> Seq.forall (fun (a, b) -> a <= b-1.0)
-    flatten t |> Seq.forall isInOrder
+    flatten t |> Seq.forall check_per_layer
